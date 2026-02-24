@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursed Spirit Compendium — Fonners</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:          #020c0e;
+    --abyss:         #030f12;
+    --surface:       #08181d;
+    --panel:         #0a1c22;
+    --border:        #0e2d38;
+    --cursed-core:   #003d52;
+    --cursed-mid:    #006e8a;
+    --cursed-glow:   #00b8d4;
+    --cursed-bright: #00e5f5;
+    --cursed-white:  #b0f0ff;
+    --ink-black:     #001015;
+    --soul-white:    #ddf4f8;
+    --dim-text:      #3a7080;
+    --orb-core:      #ff8800;
+    --orb-mid:       #cc3300;
+    --orb-deep:      #3a0800;
+    --grade-special: #ff3333;
+    --grade-1:       #ff8800;
+    --grade-2:       #ddcc00;
+    --grade-3:       #00aaff;
+    --grade-4:       #55ee88;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--soul-white);
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  #cursedCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  .content { position: relative; z-index: 1; }
+
+  /* ══════════════════════════════════════
+     SCANLINES
+  ══════════════════════════════════════ */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom, transparent 0px, transparent 3px,
+      rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ══════════════════════════════════════
+     HERO
+  ══════════════════════════════════════ */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 90% 70% at 50% 40%,
+      rgba(0,184,212,0.1) 0%,
+      rgba(0,60,80,0.08) 40%,
+      transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Ink-bleed vignette edges like the cursed aura */
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 20% 100% at 0% 50%, rgba(0,0,0,0.8) 0%, transparent 100%),
+      radial-gradient(ellipse 20% 100% at 100% 50%, rgba(0,0,0,0.8) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .ascii-art {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(4.5px, 0.9vw, 10px);
+    line-height: 1.15;
+    color: var(--cursed-bright);
+    text-shadow: 0 0 10px var(--cursed-glow), 0 0 25px rgba(0,184,212,0.4);
+    white-space: pre;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1.8s cubic-bezier(0.16,1,0.3,1) forwards 0.4s,
+               asciiPulse 5s ease-in-out infinite 2.2s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes asciiPulse {
+    0%,100% { text-shadow: 0 0 10px var(--cursed-glow), 0 0 25px rgba(0,184,212,0.35); }
+    50%      { text-shadow: 0 0 18px var(--cursed-bright), 0 0 45px rgba(0,229,245,0.55), 0 0 70px rgba(0,184,212,0.25); }
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 5vw, 3.6rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    background: linear-gradient(130deg, var(--soul-white) 0%, var(--cursed-bright) 55%, rgba(0,229,245,0.6) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    opacity: 0;
+    animation: fadeUp 1.5s cubic-bezier(0.16,1,0.3,1) forwards 1.1s;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.7rem, 1.4vw, 0.95rem);
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--cursed-glow);
+    text-shadow: 0 0 14px rgba(0,184,212,0.6);
+    opacity: 0;
+    animation: fadeUp 1.5s cubic-bezier(0.16,1,0.3,1) forwards 1.5s;
+    margin-bottom: 3rem;
+  }
+
+  .divider-rune {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--cursed-glow);
+    letter-spacing: 0.45em;
+    opacity: 0;
+    animation: fadeUp 1.5s ease forwards 1.9s;
+  }
+
+  /* ══════════════════════════════════════
+     SECTION SHARED
+  ══════════════════════════════════════ */
+  .counter-section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .main-content { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .content-section { padding: 4rem 0; border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.5em;
+    color: var(--cursed-glow); text-transform: uppercase;
+    margin-bottom: 0.9rem; opacity: 0.75;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.3rem, 3vw, 2.1rem); font-weight: 700;
+    color: var(--soul-white); margin-bottom: 3rem;
+    position: relative; display: inline-block;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute; bottom: -7px; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, var(--cursed-glow), transparent);
+  }
+
+  /* ══════════════════════════════════════
+     TOTAL COUNTER BAR
+  ══════════════════════════════════════ */
+  /* ══════════════════════════════════════
+     ORB AS COUNTER
+  ══════════════════════════════════════ */
+  .orb-counter-block {
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+    margin-bottom: 5rem;
+    padding: 1rem 0;
+  }
+
+  @media (max-width: 700px) {
+    .orb-counter-block { flex-direction: column; gap: 2rem; text-align: center; }
+  }
+
+  .orb-hero {
+    position: relative;
+    flex-shrink: 0;
+    width: 160px; height: 160px;
+  }
+
+  /* Ambient glow behind the orb */
+  .orb-hero-glow {
+    position: absolute;
+    inset: -35px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      rgba(220,100,0,0.22) 0%,
+      rgba(180,50,0,0.10) 40%,
+      transparent 70%
+    );
+    animation: orbHaloBreath 3.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes orbHaloBreath {
+    0%,100% { transform: scale(1); opacity: 0.7; }
+    50%      { transform: scale(1.12); opacity: 1; }
+  }
+
+  .orb-hero-shell {
+    position: relative; width: 100%; height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 33%,
+      #ffcc66 0%, #ff8800 15%, #cc3300 35%,
+      #7a1000 55%, #2a0500 75%, #0a0100 100%
+    );
+    box-shadow:
+      0 0 22px rgba(220,100,0,0.75),
+      0 0 50px rgba(180,60,0,0.5),
+      0 0 90px rgba(140,30,0,0.28),
+      inset 0 0 30px rgba(0,0,0,0.75),
+      inset 0 0 10px rgba(255,200,80,0.1);
+    animation: orbHeroBreath 3.5s ease-in-out infinite;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  @keyframes orbHeroBreath {
+    0%,100% {
+      box-shadow: 0 0 22px rgba(220,100,0,0.75), 0 0 50px rgba(180,60,0,0.5),
+                  0 0 90px rgba(140,30,0,0.28), inset 0 0 30px rgba(0,0,0,0.75);
+    }
+    50% {
+      box-shadow: 0 0 35px rgba(255,140,0,0.9), 0 0 75px rgba(200,80,0,0.6),
+                  0 0 130px rgba(160,50,0,0.35), inset 0 0 24px rgba(0,0,0,0.65);
+    }
+  }
+
+  /* Spinning inner soul */
+  .orb-hero-shell::before {
+    content: '';
+    position: absolute; inset: -25%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg, rgba(255,150,30,0.12) 60deg,
+      transparent 120deg, rgba(255,80,0,0.08) 180deg,
+      transparent 240deg, rgba(220,120,0,0.1) 300deg, transparent 360deg
+    );
+    animation: orbSpin 8s linear infinite;
+    border-radius: 50%;
+  }
+  .orb-hero-shell::after {
+    content: '';
+    position: absolute; inset: 18%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, rgba(255,220,100,0.22) 0%, transparent 60%);
+    animation: orbSpin 5s linear infinite reverse;
+  }
+
+  /* THE NUMBER */
+  .orb-hero-inner {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 100%;
+  }
+
+  .orb-hero-number {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.8rem, 6vw, 4rem);
+    font-weight: 900;
+    color: rgba(255, 235, 180, 0.95);
+    text-shadow:
+      0 0 12px rgba(255,200,80,0.8),
+      0 0 28px rgba(255,140,0,0.6),
+      0 2px 4px rgba(0,0,0,0.8);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .orb-hero-label {
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+
+  .orb-hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+    color: var(--soul-white);
+  }
+
+  .orb-hero-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.55em;
+    color: rgba(255,140,0,0.5);
+    text-transform: uppercase;
+    animation: absorbedPulse 3.5s ease-in-out infinite;
+  }
+
+  .orb-hero-desc {
+    font-size: 1rem;
+    color: var(--dim-text);
+    font-style: italic;
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  @keyframes absorbedPulse {
+    0%,100% { opacity: 0.45; letter-spacing: 0.55em; }
+    50%      { opacity: 0.8;  letter-spacing: 0.6em; text-shadow: 0 0 14px rgba(255,140,0,0.4); }
+  }
+
+  /* ══════════════════════════════════════
+     PENTAGON GRADE LAYOUT
+  ══════════════════════════════════════ */
+  .pentagon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .pentagon-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--dim-text);
+    text-transform: uppercase;
+  }
+
+  .pentagon-container {
+    position: relative;
+    width: 620px;
+    height: 620px;
+    flex-shrink: 0;
+  }
+
+  /* SVG connecting lines — sits above orb (z-index 0), below grade cards (z-index 2) */
+  .pentagon-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ══════════════════════════════════════
+     SPIRIT LIST & TOGGLE (per grade card)
+  ══════════════════════════════════════ */
+  .spirit-list {
+    display: none;
+    margin-top: 0.7rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.6rem;
+    max-height: 130px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,184,212,0.2) transparent;
+  }
+
+  .spirit-list.open { display: block; }
+
+  .spirit-entry {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--dim-text);
+    padding: 0.25rem 0;
+    display: flex; align-items: baseline; gap: 0.4rem;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+    border-bottom: 1px solid rgba(14,45,56,0.5);
+  }
+
+  .spirit-entry:last-child { border-bottom: none; }
+  .spirit-entry:hover { color: var(--soul-white); }
+
+  .spirit-entry::before {
+    content: '▸';
+    color: var(--cursed-glow);
+    flex-shrink: 0;
+    font-size: 0.55rem;
+  }
+
+  .spirit-entry .se-cat {
+    font-size: 0.55rem;
+    padding: 1px 5px;
+    border: 1px solid rgba(0,184,212,0.2);
+    color: rgba(0,184,212,0.5);
+    flex-shrink: 0;
+  }
+
+  .spirit-entry .se-name {
+    flex: 1;
+    color: inherit;
+  }
+
+  .spirit-entry .se-date {
+    font-size: 0.55rem;
+    color: rgba(255,140,0,0.4);
+    flex-shrink: 0;
+    letter-spacing: 0.05em;
+    margin-left: auto;
+  }
+
+  .spirit-entry:hover .se-date { color: rgba(255,140,0,0.65); }
+
+  .spirit-toggle {
+    margin-top: 0.65rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    background: none;
+    border: 1px solid rgba(0,184,212,0.15);
+    color: var(--dim-text);
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    display: none; /* hidden if no spirits */
+  }
+
+  .spirit-toggle.has-spirits { display: inline-block; }
+  .spirit-toggle:hover { border-color: rgba(0,184,212,0.4); color: var(--cursed-bright); }
+  .spirit-toggle.open-state  { color: var(--cursed-bright); border-color: rgba(0,184,212,0.35); }
+
+  .orb-inner {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 33%,
+      #ffcc66 0%,
+      #ff8800 15%,
+      #cc3300 35%,
+      #7a1000 55%,
+      #2a0500 75%,
+      #0a0100 100%
+    );
+    box-shadow:
+      0 0 18px rgba(220,100,0,0.7),
+      0 0 40px rgba(180,60,0,0.45),
+      0 0 80px rgba(140,30,0,0.25),
+      inset 0 0 25px rgba(0,0,0,0.7),
+      inset 0 0 8px rgba(255,200,80,0.15);
+    animation: orbBreath 3.5s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @keyframes orbSpin { to { transform: rotate(360deg); } }
+
+  /* Grade cards — absolutely positioned around the circle */
+  .grade-card {
+    position: absolute;
+    width: 155px;
+    transform: translate(-50%, -50%);
+    padding: 1.1rem 1.2rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    z-index: 2;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
+                border-color 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+
+  /* Pentagon positions: center at 310,310 radius 218 */
+  /* angle = -90 + i*72 degrees */
+  /* special: (-90°)  → (310, 92) */
+  .grade-card.special { left: 310px; top:  92px; }
+  /* grade1: (-18°)   → (310+208, 310-67) = (518, 243) */
+  .grade-card.grade1  { left: 517px; top: 243px; }
+  /* grade2: (54°)    → (310+128, 310+176) = (438, 486) */
+  .grade-card.grade2  { left: 438px; top: 486px; }
+  /* grade3: (126°)   → (310-128, 310+176) = (182, 486) */
+  .grade-card.grade3  { left: 182px; top: 486px; }
+  /* grade4: (198°)   → (310-208, 310-67) = (102, 243) */
+  .grade-card.grade4  { left: 103px; top: 243px; }
+
+  .grade-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+
+  .grade-card.special::before { background: var(--grade-special); box-shadow: 0 0 12px var(--grade-special); }
+  .grade-card.grade1::before  { background: var(--grade-1);       box-shadow: 0 0 12px var(--grade-1); }
+  .grade-card.grade2::before  { background: var(--grade-2);       box-shadow: 0 0 12px var(--grade-2); }
+  .grade-card.grade3::before  { background: var(--grade-3);       box-shadow: 0 0 12px var(--grade-3); }
+  .grade-card.grade4::before  { background: var(--grade-4);       box-shadow: 0 0 12px var(--grade-4); }
+
+  .grade-card:hover { box-shadow: 0 10px 35px rgba(0,0,0,0.55); }
+  .grade-card:hover.special { border-color: rgba(255,51,51,0.4);  transform: translate(-50%,-50%) scale(1.07); }
+  .grade-card:hover.grade1  { border-color: rgba(255,136,0,0.4);  transform: translate(-50%,-50%) scale(1.07); }
+  .grade-card:hover.grade2  { border-color: rgba(221,204,0,0.4);  transform: translate(-50%,-50%) scale(1.07); }
+  .grade-card:hover.grade3  { border-color: rgba(0,170,255,0.4);  transform: translate(-50%,-50%) scale(1.07); }
+  .grade-card:hover.grade4  { border-color: rgba(85,238,136,0.4); transform: translate(-50%,-50%) scale(1.07); }
+
+  .grade-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 3px 7px;
+    display: inline-block; margin-bottom: 0.7rem; font-weight: 700;
+    border-radius: 1px;
+  }
+
+  .special  .grade-badge { background: rgba(255,51,51,0.12);  color: var(--grade-special); border: 1px solid rgba(255,51,51,0.3); }
+  .grade1   .grade-badge { background: rgba(255,136,0,0.12);  color: var(--grade-1);       border: 1px solid rgba(255,136,0,0.3); }
+  .grade2   .grade-badge { background: rgba(221,204,0,0.12);  color: var(--grade-2);       border: 1px solid rgba(221,204,0,0.3); }
+  .grade3   .grade-badge { background: rgba(0,170,255,0.12);  color: var(--grade-3);       border: 1px solid rgba(0,170,255,0.3); }
+  .grade4   .grade-badge { background: rgba(85,238,136,0.12); color: var(--grade-4);       border: 1px solid rgba(85,238,136,0.3); }
+
+  .grade-count {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.4rem; font-weight: 900; line-height: 1; margin-bottom: 0.35rem;
+  }
+  .special  .grade-count { color: var(--grade-special); text-shadow: 0 0 18px rgba(255,51,51,0.5); }
+  .grade1   .grade-count { color: var(--grade-1);       text-shadow: 0 0 18px rgba(255,136,0,0.5); }
+  .grade2   .grade-count { color: var(--grade-2);       text-shadow: 0 0 18px rgba(221,204,0,0.5); }
+  .grade3   .grade-count { color: var(--grade-3);       text-shadow: 0 0 18px rgba(0,170,255,0.5); }
+  .grade4   .grade-count { color: var(--grade-4);       text-shadow: 0 0 18px rgba(85,238,136,0.5); }
+
+  .grade-name { font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; color: var(--soul-white); margin-bottom: 0.2rem; }
+  .grade-desc { font-size: 0.78rem; color: var(--dim-text); font-style: italic; line-height: 1.4; }
+
+  /* Mobile: stack the cards */
+  @media (max-width: 700px) {
+    .pentagon-container {
+      width: 100%; height: auto;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1rem;
+      padding: 2rem 1rem;
+    }
+    .pentagon-svg, .center-orb { position: relative; left: auto; top: auto; transform: none; margin: 0 auto 1rem; }
+    .grade-card { position: relative; left: auto !important; top: auto !important;
+      transform: none !important; width: 100%; max-width: 320px; }
+    .grade-card:hover { transform: translateY(-3px) !important; }
+  }
+
+  @media (max-width: 700px) {
+    .total-counter { flex-direction: column; gap: 1rem; padding: 1.8rem; }
+    .total-number  { min-width: unset; }
+  }
+
+  /* ══════════════════════════════════════
+     CONTENT BLOCKS
+  ══════════════════════════════════════ */
+  .mechanism-block {
+    padding: 2rem 2.5rem;
+    background: var(--panel); border: 1px solid var(--border);
+    border-left: 3px solid var(--cursed-glow);
+    font-size: 1.05rem; line-height: 1.85;
+    position: relative; margin-bottom: 2rem;
+  }
+
+  .mechanism-block::before {
+    content: attr(data-tag);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.2em; color: var(--cursed-glow);
+    position: absolute; top: -0.6rem; left: 1.5rem;
+    background: var(--panel); padding: 0 0.5rem;
+  }
+
+  .code-block {
+    background: var(--abyss); border: 1px solid var(--border);
+    padding: 1.8rem 2rem; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; line-height: 1.85;
+    position: relative; overflow-x: auto; margin-top: 2rem;
+  }
+
+  .code-block::before {
+    content: attr(data-label);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.2em; color: var(--dim-text);
+    position: absolute; top: 0.6rem; right: 1rem;
+    text-transform: uppercase;
+  }
+
+  .tree-dir     { color: var(--cursed-bright); }
+  .tree-file    { color: var(--soul-white); opacity: 0.8; }
+  .tree-comment { color: var(--dim-text); }
+  .tree-branch  { color: rgba(0,184,212,0.4); }
+
+  /* Classification grid */
+  .classification-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+    gap: 1.1rem; margin-top: 2rem;
+  }
+
+  .class-card {
+    padding: 1.35rem 1.5rem; background: var(--panel); border: 1px solid var(--border);
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  }
+
+  .class-card:hover {
+    border-color: rgba(0,184,212,0.3);
+    box-shadow: 0 6px 28px rgba(0,60,80,0.3);
+    transform: translateX(4px);
+  }
+
+  .class-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--cursed-glow); margin-bottom: 0.5rem; }
+  .class-name { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--soul-white); margin-bottom: 0.35rem; }
+  .class-desc { font-size: 0.88rem; color: var(--dim-text); font-style: italic; }
+
+  /* Log steps */
+  .log-steps { display: flex; flex-direction: column; border: 1px solid var(--border); margin-top: 2rem; }
+
+  .log-step { display: flex; align-items: stretch; border-bottom: 1px solid var(--border); }
+  .log-step:last-child { border-bottom: none; }
+
+  .log-step-num {
+    font-family: 'Cinzel Decorative', serif; font-size: 1.35rem; font-weight: 900;
+    color: rgba(0,184,212,0.25); min-width: 58px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,184,212,0.03); border-right: 1px solid var(--border);
+    padding: 1rem;
+  }
+
+  .log-step-content { padding: 1.1rem 1.5rem; }
+  .log-step-title { font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 700; color: var(--cursed-bright); margin-bottom: 0.25rem; }
+  .log-step-desc  { font-size: 0.88rem; color: var(--dim-text); font-style: italic; }
+
+  /* Tools */
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 1rem; margin-top: 2rem; }
+
+  .tool-item {
+    padding: 1.15rem 1.35rem; background: var(--panel); border: 1px solid var(--border);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .tool-item:hover { border-color: rgba(0,184,212,0.28); box-shadow: 0 0 18px rgba(0,60,80,0.3); }
+
+  .tool-name { font-family: 'JetBrains Mono', monospace; font-size: 0.83rem; color: var(--cursed-bright); margin-bottom: 0.2rem; }
+  .tool-use  { font-size: 0.84rem; color: var(--dim-text); font-style: italic; }
+
+  /* Platforms */
+  .platform-list { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
+
+  .platform-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.73rem;
+    padding: 0.5rem 1.1rem; background: var(--panel); border: 1px solid var(--border);
+    color: var(--dim-text); text-decoration: none;
+    transition: all 0.3s; letter-spacing: 0.05em; position: relative; overflow: hidden;
+  }
+
+  .platform-badge::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(0,184,212,0.06), transparent);
+    transform: translateX(-100%); transition: transform 0.4s ease;
+  }
+
+  .platform-badge:hover { border-color: rgba(0,184,212,0.38); color: var(--cursed-bright); box-shadow: 0 0 14px rgba(0,60,80,0.25); }
+  .platform-badge:hover::before { transform: translateX(100%); }
+
+  /* ══════════════════════════════════════
+     WEAPON TIERS — ARSENAL
+  ══════════════════════════════════════ */
+  .weapon-tier {
+    margin-bottom: 3rem;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .weapon-tier-header {
+    display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+    padding: 0.9rem 1.5rem;
+    background: rgba(0,0,0,0.25);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tier-badge {
+    font-family: 'Cinzel', serif; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.08em; padding: 4px 10px; border: 1px solid;
+  }
+
+  .tier-flavour {
+    font-size: 0.85rem; color: var(--dim-text); font-style: italic;
+  }
+
+  .weapon-row {
+    display: block;
+  }
+
+  .weapon-tool-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0;
+  }
+
+  .weapon-tool-card {
+    padding: 1.1rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.25s;
+  }
+
+  .weapon-tool-card:last-child { border-bottom: none; }
+
+  .weapon-tool-card:hover {
+    background: rgba(0,184,212,0.03);
+  }
+
+  .wtc-name {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+    color: var(--tc, var(--cursed-bright)); margin-bottom: 0.2rem; font-weight: 700;
+  }
+
+  .wtc-analogy {
+    font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 600;
+    color: var(--dim-text); margin-bottom: 0.35rem; letter-spacing: 0.03em;
+  }
+
+  .wtc-desc {
+    font-size: 0.88rem; color: rgba(221,244,248,0.6); line-height: 1.55;
+  }
+
+  /* ══════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════ */
+  .footer { border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; max-width: 1100px; margin: 0 auto; }
+
+  .footer-ascii {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.63rem;
+    color: rgba(0,184,212,0.2); white-space: pre; line-height: 1.2;
+    margin-bottom: 2rem; animation: footerBreath 5s ease-in-out infinite;
+  }
+
+  @keyframes footerBreath {
+    0%,100% { opacity: 0.4; }
+    50%      { opacity: 0.8; }
+  }
+
+  .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .footer-link  { font-family: 'JetBrains Mono', monospace; font-size: 0.73rem; color: var(--dim-text); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+  .footer-link:hover { color: var(--cursed-bright); }
+  .footer-note  { font-size: 0.85rem; color: var(--dim-text); font-style: italic; }
+
+  /* ══════════════════════════════════════
+     SCROLL REVEAL
+  ══════════════════════════════════════ */
+  .reveal {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ══════════════════════════════════════
+     SCROLLBAR
+  ══════════════════════════════════════ */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--cursed-core); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--cursed-glow); }
+</style>
+</head>
+<body>
+
+<canvas id="cursedCanvas"></canvas>
+
+<div class="content">
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <pre class="ascii-art">
+ ██████╗██╗   ██╗██████╗ ███████╗███████╗██████╗     ███████╗██████╗ ██╗██████╗ ██╗████████╗
+██╔════╝██║   ██║██╔══██╗██╔════╝██╔════╝██╔══██╗    ██╔════╝██╔══██╗██║██╔══██╗██║╚══██╔══╝
+██║     ██║   ██║██████╔╝███████╗█████╗  ██║  ██║    ███████╗██████╔╝██║██████╔╝██║   ██║
+██║     ██║   ██║██╔══██╗╚════██║██╔══╝  ██║  ██║    ╚════██║██╔═══╝ ██║██╔══██╗██║   ██║
+╚██████╗╚██████╔╝██║  ██║███████║███████╗██████╔╝    ███████║██║     ██║██║  ██║██║   ██║
+ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═════╝     ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝   ╚═╝
+
+ ██████╗ ██████╗ ███╗   ███╗██████╗ ███████╗███╗   ██╗██████╗ ██╗██╗   ██╗███╗   ███╗
+██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔════╝████╗  ██║██╔══██╗██║██║   ██║████╗ ████║
+██║     ██║   ██║██╔████╔██║██████╔╝█████╗  ██╔██╗ ██║██║  ██║██║██║   ██║██╔████╔██║
+██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██╔══╝  ██║╚██╗██║██║  ██║██║██║   ██║██║╚██╔╝██║
+╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ███████╗██║ ╚████║██████╔╝██║╚██████╔╝██║ ╚═╝ ██║
+ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚══════╝╚═╝  ╚═══╝╚═════╝ ╚═╝ ╚═════╝ ╚═╝     ╚═╝</pre>
+
+  <h1 class="hero-title">Cursed Spirit Compendium</h1>
+  <p class="hero-subtitle">CTF Writeups &amp; Absorbed Techniques</p>
+  <div class="divider-rune">━━━ ◈ ━━━ 呪術師 ━━━ ◈ ━━━</div>
+</section>
+
+<!-- ══════ SPIRIT COUNTER ══════ -->
+<section class="counter-section">
+  <p class="section-label reveal">◈ Absorption Registry</p>
+  <h2 class="section-title reveal">Spirits Consumed</h2>
+
+  <!-- ORB AS COUNTER — number lives inside the orb -->
+  <div class="orb-counter-block reveal">
+    <div class="orb-hero">
+      <div class="orb-hero-glow"></div>
+      <div class="orb-hero-shell">
+        <div class="orb-hero-inner">
+          <span class="orb-hero-number" id="totalCount">0</span>
+        </div>
+      </div>
+    </div>
+    <div class="orb-hero-label">
+      <div class="orb-hero-title">Total Spirits Absorbed</div>
+      <div class="orb-hero-sub">A B S O R B E D</div>
+      <div class="orb-hero-desc">Each challenge broken down, catalogued, and permanently added to the technique arsenal. Every spirit consumed is a technique that cannot be taken away.</div>
+    </div>
+  </div>
+
+  <!-- PENTAGON GRAPH -->
+  <div class="pentagon-wrapper reveal">
+    <p class="pentagon-label">◈ Cursed Grade Classification</p>
+
+    <div class="pentagon-container">
+
+      <!-- SVG layer — pentagon lines and spokes -->
+      <svg class="pentagon-svg" viewBox="0 0 620 620" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Outer subtle ring -->
+        <circle cx="310" cy="310" r="218" fill="none" stroke="rgba(0,100,120,0.15)" stroke-width="1"/>
+
+        <!-- Pentagon outline -->
+        <polygon
+          points="310,92 517,243 438,486 182,486 103,243"
+          fill="none"
+          stroke="rgba(0,184,212,0.18)"
+          stroke-width="1"
+          stroke-dasharray="4 6"
+          filter="url(#glow)"
+        />
+
+        <!-- Spokes from center -->
+        <line x1="310" y1="310" x2="310" y2="92"  stroke="rgba(0,184,212,0.08)" stroke-width="1" stroke-dasharray="3 7"/>
+        <line x1="310" y1="310" x2="517" y2="243" stroke="rgba(0,184,212,0.08)" stroke-width="1" stroke-dasharray="3 7"/>
+        <line x1="310" y1="310" x2="438" y2="486" stroke="rgba(0,184,212,0.08)" stroke-width="1" stroke-dasharray="3 7"/>
+        <line x1="310" y1="310" x2="182" y2="486" stroke="rgba(0,184,212,0.08)" stroke-width="1" stroke-dasharray="3 7"/>
+        <line x1="310" y1="310" x2="103" y2="243" stroke="rgba(0,184,212,0.08)" stroke-width="1" stroke-dasharray="3 7"/>
+
+        <!-- Animated pulse ring -->
+        <circle cx="310" cy="310" r="218" fill="none" stroke="rgba(0,200,220,0.0)" stroke-width="80">
+          <animate attributeName="stroke-opacity" values="0;0.04;0" dur="4s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+
+      <!-- Grade Cards — z-index:2, on top of everything -->
+      <div class="grade-card special">
+        <span class="grade-badge">Special Grade</span>
+        <div class="grade-count" data-grade="special">0</div>
+        <div class="grade-name">Catastrophic</div>
+        <div class="grade-desc">Insane / no ceiling — full chain exploitation</div>
+        <div class="spirit-list" id="list-special"></div>
+        <button class="spirit-toggle" data-target="list-special">▸ spirits</button>
+      </div>
+
+      <div class="grade-card grade1">
+        <span class="grade-badge">Grade 1</span>
+        <div class="grade-count" data-grade="1">0</div>
+        <div class="grade-name">Hard Tier</div>
+        <div class="grade-desc">Expert-level, custom exploit paths required</div>
+        <div class="spirit-list" id="list-1"></div>
+        <button class="spirit-toggle" data-target="list-1">▸ spirits</button>
+      </div>
+
+      <div class="grade-card grade2">
+        <span class="grade-badge">Grade 2</span>
+        <div class="grade-count" data-grade="2">0</div>
+        <div class="grade-name">Medium Tier</div>
+        <div class="grade-desc">Chained vulns, lateral thinking, recon-heavy</div>
+        <div class="spirit-list" id="list-2"></div>
+        <button class="spirit-toggle" data-target="list-2">▸ spirits</button>
+      </div>
+
+      <div class="grade-card grade3">
+        <span class="grade-badge">Grade 3</span>
+        <div class="grade-count" data-grade="3">0</div>
+        <div class="grade-name">Easy Tier</div>
+        <div class="grade-desc">Foundational — clean single-step exploitation</div>
+        <div class="spirit-list" id="list-3"></div>
+        <button class="spirit-toggle" data-target="list-3">▸ spirits</button>
+      </div>
+
+      <div class="grade-card grade4">
+        <span class="grade-badge">Grade 4</span>
+        <div class="grade-count" data-grade="4">0</div>
+        <div class="grade-name">Beginner Tier</div>
+        <div class="grade-desc">Intro-level — low output, fully documented</div>
+        <div class="spirit-list" id="list-4"></div>
+        <button class="spirit-toggle" data-target="list-4">▸ spirits</button>
+      </div>
+
+    </div><!-- /pentagon-container -->
+  </div><!-- /pentagon-wrapper -->
+</section>
+
+<!-- ══════ MAIN CONTENT ══════ -->
+<div class="main-content">
+
+  <!-- HOW IT WORKS -->
+  <section class="content-section">
+    <p class="section-label reveal">◈ Technique Theory</p>
+    <h2 class="section-title reveal">Cursed Spirit Manipulation</h2>
+
+    <div class="mechanism-block reveal" data-tag="// TECHNIQUE OVERVIEW">
+      The technique operates on one principle: consume a cursed spirit and it becomes a permanent
+      asset. The spirit retains all properties. You retain full control. The arsenal expands indefinitely.<br><br>
+      This repository follows the same logic. Every challenge absorbed is documented for redeployment —
+      same vulnerability surface, same attack vector, same exploit pattern. Each writeup is a spirit
+      catalogued in exact detail: how it was found, how it was dismantled, what it leaves behind in
+      the arsenal. The compendium doesn't forget.
+    </div>
+
+    <div class="code-block reveal" data-label="grade system">
+<span class="tree-comment">// CURSED GRADE — CTF DIFFICULTY MAPPING</span>
+
+<span class="tree-branch">Grade           Difficulty</span>
+<span style="color:var(--grade-special)">  ██</span>  <span class="tree-file">Special Grade  ─── Insane · full priv esc chain · uncommon techniques</span>
+<span style="color:var(--grade-1)">  ██</span>  <span class="tree-file">Grade 1        ─── Hard  · multi-stage · custom exploitation required</span>
+<span style="color:var(--grade-2)">  ██</span>  <span class="tree-file">Grade 2        ─── Medium · chained vulns · prior experience needed</span>
+<span style="color:var(--grade-3)">  ██</span>  <span class="tree-file">Grade 3        ─── Easy  · foundational vulnerabilities · single-step</span>
+<span style="color:var(--grade-4)">  ██</span>  <span class="tree-file">Grade 4        ─── Beginner · textbook · entry-level technique</span>
+    </div>
+  </section>
+
+  <!-- REPO STRUCTURE -->
+  <section class="content-section">
+    <p class="section-label reveal">◈ Archive Architecture</p>
+    <h2 class="section-title reveal">Repository Structure</h2>
+
+    <div class="code-block reveal" data-label="tree">
+<span class="tree-dir">CTF-Walkthroughs/</span>
+<span class="tree-branch">├── </span><span class="tree-file">README.html             <span class="tree-comment">← you are here</span></span>
+<span class="tree-branch">│</span>
+<span class="tree-branch">├── </span><span class="tree-dir">CTF-Fonners-2025/</span>
+<span class="tree-branch">│   ├── </span><span class="tree-dir">[Category]/</span>
+<span class="tree-branch">│   │   └── </span><span class="tree-dir">[Spirit-Name]/</span>
+<span class="tree-branch">│   │       ├── </span><span class="tree-file">README.md     <span class="tree-comment">← absorption log</span></span>
+<span class="tree-branch">│   │       └── </span><span class="tree-dir">files/        <span class="tree-comment">← extracted artifacts</span></span>
+<span class="tree-branch">│</span>
+<span class="tree-branch">└── </span><span class="tree-dir">CTF-Fonners-2026/</span>
+<span class="tree-branch">    ├── </span><span class="tree-dir">[Category]/</span>
+<span class="tree-branch">    │   └── </span><span class="tree-dir">[Spirit-Name]/</span>
+<span class="tree-branch">    │       ├── </span><span class="tree-file">README.md     <span class="tree-comment">← absorption log</span></span>
+<span class="tree-branch">    │       └── </span><span class="tree-dir">files/        <span class="tree-comment">← extracted artifacts</span></span>
+<span class="tree-branch">    └── </span><span class="tree-file">...</span>
+    </div>
+  </section>
+
+  <!-- CLASSIFICATIONS -->
+  <section class="content-section">
+    <p class="section-label reveal">◈ Spirit Taxonomy</p>
+    <h2 class="section-title reveal">Classifications</h2>
+
+    <div class="classification-grid reveal">
+      <div class="class-card"><div class="class-icon">[ WEB ]</div><div class="class-name">Web Exploitation</div><div class="class-desc">Application vulns, injection chains, auth bypass, SSRF, deserialization</div></div>
+      <div class="class-card"><div class="class-icon">[ BIN ]</div><div class="class-name">Binary Exploitation</div><div class="class-desc">Buffer overflows, ROP chains, heap corruption, memory layout manipulation</div></div>
+      <div class="class-card"><div class="class-icon">[ REV ]</div><div class="class-name">Reverse Engineering</div><div class="class-desc">Decompilation, obfuscation stripping, firmware analysis, anti-debug bypass</div></div>
+      <div class="class-card"><div class="class-icon">[ CRY ]</div><div class="class-name">Cryptography</div><div class="class-desc">Cipher attacks, implementation flaws, key recovery, padding oracles, hash collisions</div></div>
+      <div class="class-card"><div class="class-icon">[ FOR ]</div><div class="class-name">Forensics</div><div class="class-desc">Artifact recovery, steganography, PCAP analysis, memory forensics, disk imaging</div></div>
+      <div class="class-card"><div class="class-icon">[ IOT ]</div><div class="class-name">IoT &amp; OT</div><div class="class-desc">Firmware extraction, industrial protocols, embedded systems, hardware attack surface</div></div>
+      <div class="class-card"><div class="class-icon">[ MIS ]</div><div class="class-name">Miscellaneous</div><div class="class-desc">Spirits that defy clean classification — unconventional attack paths</div></div>
+    </div>
+  </section>
+
+  <!-- ABSORPTION LOG FORMAT -->
+  <section class="content-section">
+    <p class="section-label reveal">◈ Documentation Protocol</p>
+    <h2 class="section-title reveal">Absorption Log Format</h2>
+
+    <div class="log-steps reveal">
+      <div class="log-step">
+        <div class="log-step-num">I</div>
+        <div class="log-step-content">
+          <div class="log-step-title">Target Profile</div>
+          <div class="log-step-desc">Challenge name, category, platform, point value, assigned grade, initial description</div>
+        </div>
+      </div>
+      <div class="log-step">
+        <div class="log-step-num">II</div>
+        <div class="log-step-content">
+          <div class="log-step-title">Initial Assessment</div>
+          <div class="log-step-desc">First contact observations, reconnaissance steps, attack surface mapping</div>
+        </div>
+      </div>
+      <div class="log-step">
+        <div class="log-step-num">III</div>
+        <div class="log-step-content">
+          <div class="log-step-title">Engagement</div>
+          <div class="log-step-desc">Full step-by-step walkthrough — every decision, dead end, and working payload documented</div>
+        </div>
+      </div>
+      <div class="log-step">
+        <div class="log-step-num">IV</div>
+        <div class="log-step-content">
+          <div class="log-step-title">Techniques &amp; Tools</div>
+          <div class="log-step-desc">Exact tools used, configurations, scripts written, commands executed</div>
+        </div>
+      </div>
+      <div class="log-step">
+        <div class="log-step-num">V</div>
+        <div class="log-step-content">
+          <div class="log-step-title">Flag Extracted</div>
+          <div class="log-step-desc">The captured flag — published after competition window closes</div>
+        </div>
+      </div>
+      <div class="log-step">
+        <div class="log-step-num">VI</div>
+        <div class="log-step-content">
+          <div class="log-step-title">Retained Technique</div>
+          <div class="log-step-desc">What this spirit adds permanently to the arsenal — redeployable knowledge, edge cases, pattern recognition</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS / ARSENAL -->
+  <section class="content-section">
+    <p class="section-label reveal">◈ Deployed Techniques</p>
+    <h2 class="section-title reveal">Arsenal — Cursed Tool Registry</h2>
+
+    <div class="mechanism-block reveal" data-tag="// TOOL CLASSIFICATION">
+      In jujutsu, cursed tools are ranked by how much cursed energy is infused into them — and
+      how impossible they are to counter. The arsenal here follows the same structure. Some tools
+      nullify entire categories of defense. Others are workhorses you reach for every engagement.
+      All of them are catalogued and ready to deploy.
+    </div>
+
+    <!-- SPECIAL GRADE TIER -->
+    <div class="weapon-tier reveal">
+      <div class="weapon-tier-header special-tier">
+        <span class="tier-badge" style="color:var(--grade-special);border-color:rgba(255,51,51,0.3);background:rgba(255,51,51,0.08)">Special Grade Cursed Tools</span>
+        <span class="tier-flavour">No binding necessary — nullifies all conventional defenses</span>
+      </div>
+      <div class="weapon-row">
+        <div class="weapon-tool-list">
+          <div class="weapon-tool-card" style="--tc:var(--grade-special)">
+            <div class="wtc-name">Custom Exploit Development</div>
+            <div class="wtc-analogy">Inverted Spear of Heaven — nullifies all defenses, bespoke to target</div>
+            <div class="wtc-desc">Hand-written shellcode, kernel exploits, novel attack chains with no public PoC. Built for a single target. Cannot be patched against before it lands.</div>
+          </div>
+          <div class="weapon-tool-card" style="--tc:var(--grade-special)">
+            <div class="wtc-name">pwntools (advanced)</div>
+            <div class="wtc-analogy">Split Soul Katana — cuts through the soul of a binary</div>
+            <div class="wtc-desc">Full ROP chain automation, heap grooming, ret2libc — used at this tier when the binary has no obvious entry, only a structural weakness to exploit precisely.</div>
+          </div>
+          <div class="weapon-tool-card" style="--tc:var(--grade-special)">
+            <div class="wtc-name">Custom C2 / Reverse Shells</div>
+            <div class="wtc-analogy">Playful Cloud — a tethered weapon with total reach</div>
+            <div class="wtc-desc">Bespoke command-and-control channels, encrypted callbacks, anti-detection payloads. Deployed when standard shells get caught immediately.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRADE 1 TIER -->
+    <div class="weapon-tier reveal">
+      <div class="weapon-tier-header grade1-tier">
+        <span class="tier-badge" style="color:var(--grade-1);border-color:rgba(255,136,0,0.3);background:rgba(255,136,0,0.08)">Grade 1 Cursed Tools</span>
+        <span class="tier-flavour">Extraordinarily powerful — only sorcerers of equal rank can wield them effectively</span>
+      </div>
+      <div class="weapon-row">
+        <div class="weapon-tool-list">
+          <div class="weapon-tool-card" style="--tc:var(--grade-1)">
+            <div class="wtc-name">Ghidra / IDA Pro</div>
+            <div class="wtc-analogy">Dragon-Bone Sword — carved from a structure that was never meant to be seen</div>
+            <div class="wtc-desc">Full decompilation, cross-reference graphs, FLIRT signatures, scripting APIs. Takes experience to use at full power — but shows you everything once you do.</div>
+          </div>
+          <div class="weapon-tool-card" style="--tc:var(--grade-1)">
+            <div class="wtc-name">Metasploit (custom modules)</div>
+            <div class="wtc-analogy">Pot of Four Virtues — contains anything, releases anything</div>
+            <div class="wtc-desc">A container for any payload. Off-the-shelf modules are Grade 2. But custom-written Metasploit modules shaped to a specific CVE are something else entirely.</div>
+          </div>
+          <div class="weapon-tool-card" style="--tc:var(--grade-1)">
+            <div class="wtc-name">Frida / dynamic instrumentation</div>
+            <div class="wtc-analogy">Slumber Bead — hooks into consciousness mid-execution</div>
+            <div class="wtc-desc">Runtime injection, function hooking, API tracing across both mobile and desktop targets. Reaches inside running processes and rewires them in real time.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRADE 2 TIER -->
+    <div class="weapon-tier reveal">
+      <div class="weapon-tier-header grade2-tier">
+        <span class="tier-badge" style="color:var(--grade-2);border-color:rgba(221,204,0,0.3);background:rgba(221,204,0,0.08)">Grade 2 Cursed Tools</span>
+        <span class="tier-flavour">Reliably powerful — standard-issue for any serious engagement</span>
+      </div>
+      <div class="weapon-row">
+        <div class="weapon-tool-list">
+          <div class="weapon-tool-card" style="--tc:var(--grade-2)">
+            <div class="wtc-name">Burp Suite</div>
+            <div class="wtc-analogy">Binding Vow Lance — intercepts and rewrites the contract</div>
+            <div class="wtc-desc">Web proxy, scanner, repeater, intruder, decoder. The entire HTTP surface is yours to inspect and manipulate. No web engagement goes without it.</div>
+          </div>
+          <div class="weapon-tool-card" style="--tc:var(--grade-2)">
+            <div class="wtc-name">nmap + scripts (NSE)</div>
+            <div class="wtc-analogy">Projection Sorcery Bow — maps the entire domain from range</div>
+            <div class="wtc-desc">Full network topology, service versions, OS fingerprinting, default-credential checks via NSE scripts. The first thing cast before any engagement.</div>
+          </div>
+          <div class="weapon-tool-card" style="--tc:var(--grade-2)">
+            <div class="wtc-name">sqlmap</div>
+            <div class="wtc-analogy">Cursed Blade of the Origin — finds the flaw in the foundation</div>
+            <div class="wtc-desc">Automated SQL injection detection and exploitation across all major database backends. Blunt but effective — the database rarely survives contact.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEMI-CURSED / GRADE 3-4 TIER -->
+    <div class="weapon-tier reveal">
+      <div class="weapon-tier-header grade34-tier">
+        <span class="tier-badge" style="color:var(--grade-3);border-color:rgba(0,170,255,0.3);background:rgba(0,170,255,0.08)">Semi-Cursed &amp; Non-Cursed Tools</span>
+        <span class="tier-flavour">No innate cursed energy — but in the right hands, lethal all the same</span>
+      </div>
+      <div class="weapon-row">
+        <div class="weapon-tool-list">
+          <div class="weapon-tool-card" style="--tc:var(--grade-3)">
+            <div class="wtc-name">Wireshark / tcpdump</div>
+            <div class="wtc-analogy">A sorcerer's ear pressed to the wire — hears everything</div>
+            <div class="wtc-desc">Full packet capture, protocol dissection, stream reconstruction. No cursed energy required — just the ability to read what was never meant to be read.</div>
+          </div>
+          <div class="weapon-tool-card" style="--tc:var(--grade-3)">
+            <div class="wtc-name">hashcat / john</div>
+            <div class="wtc-analogy">Attrition. Not a weapon — a grindstone.</div>
+            <div class="wtc-desc">Rule-based, mask, combinator, and dictionary attacks. Pure compute against a captured hash. The lock breaks eventually if the wordlist is right.</div>
+          </div>
+          <div class="weapon-tool-card" style="--tc:var(--grade-3)">
+            <div class="wtc-name">ffuf / gobuster</div>
+            <div class="wtc-analogy">Domain Expansion: Infinite Directory</div>
+            <div class="wtc-desc">Virtual-host fuzzing, endpoint brute-force, parameter discovery. The attack surface is always larger than the application wants to admit.</div>
+          </div>
+          <div class="weapon-tool-card" style="--tc:var(--grade-4)">
+            <div class="wtc-name">volatility / autopsy</div>
+            <div class="wtc-analogy">Reverse Cursed Technique — recovers what was already destroyed</div>
+            <div class="wtc-desc">Memory forensics, process dumps, registry hives, artifact recovery. What was deleted is still there. What was running is still visible. The past isn't gone.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- PLATFORMS -->
+  <section class="content-section">
+    <p class="section-label reveal">◈ Hunting Grounds</p>
+    <h2 class="section-title reveal">Platforms</h2>
+
+    <div class="platform-list reveal">
+      <a class="platform-badge" href="https://www.hackthebox.com/" target="_blank">HackTheBox</a>
+      <a class="platform-badge" href="https://tryhackme.com/" target="_blank">TryHackMe</a>
+      <a class="platform-badge" href="https://picoctf.org/" target="_blank">PicoCTF</a>
+      <a class="platform-badge" href="https://ctftime.org/" target="_blank">CTFtime</a>
+      <a class="platform-badge" href="https://www.vulnhub.com/" target="_blank">Vulnhub</a>
+    </div>
+  </section>
+
+</div><!-- /main-content -->
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="footer">
+  <pre class="footer-ascii">
+  ╔════════════════════════════════════════════════╗
+  ║  呪術   A B S O R P T I O N   C O M P L E T E  ║
+  ║  The spirit has been catalogued.               ║
+  ║  The technique is now permanent.               ║
+  ╚════════════════════════════════════════════════╝</pre>
+  <div class="footer-links">
+    <a class="footer-link" href="https://github.com/Fonners">@Fonners</a>
+    <a class="footer-link" href="https://github.com/Fonners/CTF-Walkthroughs">Repository</a>
+  </div>
+  <p class="footer-note">Writeups published after competition windows close. All techniques demonstrated in authorized environments only.</p>
+</footer>
+
+</div><!-- /content -->
+
+<script>
+// ══════════════════════════════════════
+// CURSED ENERGY CANVAS — JJK teal/black
+// ══════════════════════════════════════
+const canvas = document.getElementById('cursedCanvas');
+const ctx    = canvas.getContext('2d');
+
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+function rand(a, b) { return a + Math.random() * (b - a); }
+
+// ── Cursed Energy Wisp (teal-black JJK style) ──
+class Wisp {
+  constructor(isTeal = true) {
+    this.isTeal = isTeal;
+    this.reset(true);
+  }
+  reset(init = false) {
+    this.x  = rand(0, canvas.width);
+    this.y  = init ? rand(0, canvas.height) : canvas.height + rand(5, 20);
+    this.vy = rand(-0.25, -0.8);
+    this.vx = rand(-0.3, 0.3);
+    this.life    = 0;
+    this.maxLife = rand(180, 480);
+    this.size    = rand(1.5, this.isTeal ? 5 : 3);
+    // JJK cursed energy: bright teal (175-200) or near-black ink tendrils (195-210 very dark)
+    this.hue = this.isTeal ? rand(178, 198) : rand(190, 210);
+    this.sat = this.isTeal ? rand(70, 100) : rand(40, 65);
+    this.lum = this.isTeal ? rand(45, 65)  : rand(10, 22);  // dark tendrils
+    this.wobble      = rand(0, Math.PI * 2);
+    this.wobbleSpeed = rand(0.008, 0.028);
+  }
+  update() {
+    this.life++;
+    this.wobble += this.wobbleSpeed;
+    this.x += this.vx + Math.sin(this.wobble) * 0.5;
+    this.y += this.vy;
+    const t = this.life / this.maxLife;
+    this.alpha = t < 0.15 ? t / 0.15 : t > 0.72 ? 1 - (t - 0.72) / 0.28 : 1;
+    if (this.life > this.maxLife || this.y < -20) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha * (this.isTeal ? 0.5 : 0.25);
+    const r = this.size * (this.isTeal ? 4 : 2.5);
+    const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r);
+    g.addColorStop(0, `hsla(${this.hue}, ${this.sat}%, ${this.lum}%, 1)`);
+    g.addColorStop(0.45, `hsla(${this.hue}, ${this.sat - 10}%, ${this.lum - 10}%, 0.45)`);
+    g.addColorStop(1, `hsla(${this.hue}, ${this.sat}%, ${this.lum}%, 0)`);
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+// ── Ink Tendril (the black blob outline from image 1) ──
+class InkBlob {
+  constructor() { this.reset(); }
+  reset() {
+    this.x  = rand(0.05, 0.95) * canvas.width;
+    this.y  = rand(0.05, 0.95) * canvas.height;
+    this.points = [];
+    const n = 6 + Math.floor(rand(0, 4));
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2;
+      const r = rand(20, 55);
+      this.points.push({ angle: a, baseR: r, phase: rand(0, Math.PI * 2), speed: rand(0.005, 0.015) });
+    }
+    this.alpha = 0;
+    this.life  = 0;
+    this.maxLife = rand(300, 700);
+    this.vy = rand(-0.06, -0.18);
+    this.vx = rand(-0.08, 0.08);
+  }
+  update() {
+    this.life++;
+    this.x += this.vx;
+    this.y += this.vy;
+    this.points.forEach(p => p.phase += p.speed);
+    const t = this.life / this.maxLife;
+    this.alpha = t < 0.1 ? t / 0.1 : t > 0.7 ? 1 - (t - 0.7) / 0.3 : 1;
+    if (this.life > this.maxLife || this.y < -80) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha * 0.15;
+    ctx.beginPath();
+    this.points.forEach((p, i) => {
+      const r = p.baseR * (0.7 + 0.3 * Math.sin(p.phase));
+      const x = this.x + r * Math.cos(p.angle);
+      const y = this.y + r * Math.sin(p.angle);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.strokeStyle = 'rgba(0, 180, 210, 0.6)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    // inner dark fill
+    ctx.globalAlpha = this.alpha * 0.06;
+    ctx.fillStyle = 'rgba(0, 20, 30, 1)';
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+// ── Floating orb (absorbed spirit dots) ──
+class SpiritOrb {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = rand(0.1, 0.9) * canvas.width;
+    this.y = rand(0.1, 0.9) * canvas.height;
+    this.r = rand(3, 12);
+    // mix of teal orbs and faint orange (absorbed spirit) ones
+    this.kind = Math.random() > 0.75 ? 'orb' : 'teal';
+    this.hue  = this.kind === 'teal' ? rand(178, 198) : rand(20, 35);
+    this.phase      = rand(0, Math.PI * 2);
+    this.phaseSpeed = rand(0.007, 0.022);
+    this.lifePhase  = rand(0, Math.PI * 2);
+    this.lifeSpeed  = rand(0.004, 0.012);
+    this.dx = rand(-0.07, 0.07);
+    this.dy = rand(-0.07, 0.07);
+  }
+  update() {
+    this.phase     += this.phaseSpeed;
+    this.lifePhase += this.lifeSpeed;
+    this.x += this.dx + Math.sin(this.phase * 0.6) * 0.14;
+    this.y += this.dy + Math.cos(this.phase * 0.4) * 0.1;
+    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+  }
+  draw() {
+    const pulse  = 0.5 + 0.5 * Math.sin(this.phase);
+    const alpha  = 0.25 + 0.22 * Math.sin(this.lifePhase);
+    const sat    = this.kind === 'teal' ? 90 : 85;
+    const lum    = this.kind === 'teal' ? 50 : 55;
+    const gr = this.r * (2.5 + pulse * 2);
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, gr);
+    g.addColorStop(0, `hsla(${this.hue}, ${sat}%, ${lum + 20}%, 0.9)`);
+    g.addColorStop(0.35, `hsla(${this.hue}, ${sat}%, ${lum}%, 0.45)`);
+    g.addColorStop(1, `hsla(${this.hue}, ${sat}%, ${lum - 10}%, 0)`);
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, gr, 0, Math.PI * 2);
+    ctx.fill();
+    // bright core
+    ctx.globalAlpha = alpha * 1.6;
+    ctx.fillStyle = `hsla(${this.hue}, 100%, 85%, 1)`;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r * 0.35, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+function drawOrbConnections(orbs) {
+  for (let i = 0; i < orbs.length; i++) {
+    for (let j = i + 1; j < orbs.length; j++) {
+      const dx = orbs[i].x - orbs[j].x, dy = orbs[i].y - orbs[j].y;
+      const d  = Math.sqrt(dx*dx + dy*dy);
+      if (d < 230) {
+        ctx.save();
+        ctx.globalAlpha = (1 - d / 230) * 0.055;
+        ctx.strokeStyle = 'hsl(188, 80%, 45%)';
+        ctx.lineWidth = 0.5;
+        ctx.setLineDash([2, 9]);
+        ctx.beginPath(); ctx.moveTo(orbs[i].x, orbs[i].y); ctx.lineTo(orbs[j].x, orbs[j].y);
+        ctx.stroke(); ctx.restore();
+      }
+    }
+  }
+}
+
+// Build population
+const wisps = [];
+for (let i = 0; i < 45; i++) wisps.push(new Wisp(true));   // teal
+for (let i = 0; i < 18; i++) wisps.push(new Wisp(false));  // dark tendrils
+const blobs = [];
+for (let i = 0; i < 8; i++) blobs.push(new InkBlob());
+const orbs = [];
+for (let i = 0; i < 14; i++) orbs.push(new SpiritOrb());
+
+// ── Cursor trail ──
+const trail = []; const TRAIL_LEN = 22;
+document.addEventListener('mousemove', e => {
+  trail.push({ x: e.clientX, y: e.clientY, age: 0 });
+  if (trail.length > TRAIL_LEN) trail.shift();
+});
+
+function drawTrail() {
+  trail.forEach((p, i) => {
+    p.age++;
+    const alpha = (1 - p.age / (TRAIL_LEN * 3.5)) * 0.32 * (i / TRAIL_LEN);
+    if (alpha <= 0) return;
+    ctx.save(); ctx.globalAlpha = alpha;
+    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 7);
+    g.addColorStop(0, 'hsla(188, 100%, 65%, 1)');
+    g.addColorStop(1, 'hsla(188, 100%, 50%, 0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(p.x, p.y, 7, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  });
+}
+
+function loop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  blobs.forEach(b => { b.update(); b.draw(); });
+  orbs.forEach(o  => { o.update(); o.draw(); });
+  drawOrbConnections(orbs);
+  wisps.forEach(w  => { w.update(); w.draw(); });
+  drawTrail();
+  requestAnimationFrame(loop);
+}
+loop();
+
+// ══════════════════════════════════════
+// ╔══════════════════════════════════════╗
+// ║  EDIT THIS SECTION TO UPDATE DATA   ║
+// ╚══════════════════════════════════════╝
+//
+// For each grade, add CTF names to the "spirits" array.
+// Format: { name: "Challenge Name", cat: "WEB" }
+// Categories: WEB  BIN  REV  CRY  FOR  IOT  MIS
+//
+// The total is computed automatically from all grade counts.
+// ──────────────────────────────────────
+const SPIRIT_DATA = {
+  special: {
+    spirits: [
+      // { name: "SomeInsaneBox", cat: "BIN", date: "2025-03-14" },
+    ]
+  },
+  1: {
+    spirits: [
+      // { name: "HardChallenge", cat: "WEB", date: "2025-04-02" },
+    ]
+  },
+  2: {
+    spirits: [
+      { name: "School 1", cat: "BIN", date: "2025-11-15" },
+    ]
+  },
+  3: {
+    spirits: [
+      // { name: "EasyChallenge", cat: "CRY", date: "2025-06-07" },
+    ]
+  },
+  4: {
+    spirits: [
+      // { name: "StartingPoint", cat: "MIS", date: "2025-01-11" },
+    ]
+  },
+};
+// ══════════════════════════════════════
+// END OF EDITABLE DATA SECTION
+// ══════════════════════════════════════
+
+// Compute total automatically
+const totalSpirits = Object.values(SPIRIT_DATA).reduce((acc, g) => acc + g.spirits.length, 0);
+
+function animCount(el, target, dur = 1800) {
+  const s = performance.now();
+  (function step(now) {
+    const t    = Math.min((now - s) / dur, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(ease * target);
+    if (t < 1) requestAnimationFrame(step);
+  })(s);
+}
+
+// Populate grade cards
+function buildSpiritLists() {
+  Object.entries(SPIRIT_DATA).forEach(([grade, data]) => {
+    const countEl  = document.querySelector(`[data-grade="${grade}"]`);
+    const listEl   = document.getElementById(`list-${grade}`);
+    const toggleEl = listEl ? listEl.nextElementSibling : null;
+
+    if (countEl) countEl.textContent = data.spirits.length;
+
+    if (listEl) {
+      if (data.spirits.length > 0) {
+        listEl.innerHTML = data.spirits.map(s =>
+          `<div class="spirit-entry">
+             <span class="se-cat">${s.cat}</span>
+             <span class="se-name">${s.name}</span>
+             <span class="se-date">${s.date || '—'}</span>
+           </div>`
+        ).join('');
+        if (toggleEl) toggleEl.classList.add('has-spirits');
+      }
+    }
+  });
+}
+
+buildSpiritLists();
+
+// Toggle spirit lists
+document.querySelectorAll('.spirit-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.dataset.target);
+    const isOpen = target.classList.contains('open');
+    target.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open-state', !isOpen);
+    btn.textContent = isOpen ? '▸ spirits' : '▾ spirits';
+  });
+});
+
+// Animate total count on scroll into view
+const cObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animCount(document.getElementById('totalCount'), totalSpirits);
+      cObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+cObs.observe(document.querySelector('.orb-counter-block'));
+
+// ══════════════════════════════════════
+// SCROLL REVEAL
+// ══════════════════════════════════════
+const rObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
+</script>
+
+</body>
+</html>
