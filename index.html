@@ -410,9 +410,18 @@
     flex-shrink: 0;
   }
 
-  .spirit-entry .se-name {
-    flex: 1;
-    color: inherit;
+  .spirit-entry .se-name { flex: 1; color: inherit; }
+
+  .spirit-entry .se-link {
+    color: var(--cursed-bright);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,184,212,0.25);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .spirit-entry .se-link:hover {
+    color: #fff;
+    border-bottom-color: var(--cursed-bright);
   }
 
   .spirit-entry .se-date {
@@ -1175,11 +1184,11 @@
 <!-- ══════ FOOTER ══════ -->
 <footer class="footer">
   <pre class="footer-ascii">
-  ╔════════════════════════════════════════════════╗
-  ║  呪術   A B S O R P T I O N   C O M P L E T E  ║
+  ╔═══════════════════════════════════════════════╗
+  ║  呪術   A B S O R P T I O N   C O M P L E T E ║
   ║  The spirit has been catalogued.               ║
   ║  The technique is now permanent.               ║
-  ╚════════════════════════════════════════════════╝</pre>
+  ╚═══════════════════════════════════════════════╝</pre>
   <div class="footer-links">
     <a class="footer-link" href="https://github.com/Fonners">@Fonners</a>
     <a class="footer-link" href="https://github.com/Fonners/CTF-Walkthroughs">Repository</a>
@@ -1415,7 +1424,8 @@ loop();
 // ╚══════════════════════════════════════╝
 //
 // For each grade, add CTF names to the "spirits" array.
-// Format: { name: "Challenge Name", cat: "WEB" }
+// Format: { name: "Challenge Name", cat: "WEB", date: "2025-03-14", url: "https://..." }
+// url is optional — if omitted the name renders as plain text
 // Categories: WEB  BIN  REV  CRY  FOR  IOT  MIS
 //
 // The total is computed automatically from all grade counts.
@@ -1423,27 +1433,27 @@ loop();
 const SPIRIT_DATA = {
   special: {
     spirits: [
-      // { name: "SomeInsaneBox", cat: "BIN", date: "2025-03-14" },
+      // { name: "SomeInsaneBox", cat: "BIN", date: "2025-03-14", url: "https://github.com/Fonners/CTF-Walkthroughs/..." },
     ]
   },
   1: {
     spirits: [
-      // { name: "HardChallenge", cat: "WEB", date: "2025-04-02" },
+      // { name: "HardChallenge", cat: "WEB", date: "2025-04-02", url: "https://github.com/Fonners/CTF-Walkthroughs/..." },
     ]
   },
   2: {
     spirits: [
-      { name: "School 1", cat: "BIN", date: "2025-11-15" },
+      { name: "School 1", cat: "BIN", date: "2025-11-15", url: "https://github.com/Fonners/CTF-Walkthroughs/tree/main/CTF-Fonners-2025/Binary%20Exploitation/School%201" },
     ]
   },
   3: {
     spirits: [
-      // { name: "EasyChallenge", cat: "CRY", date: "2025-06-07" },
+      // { name: "EasyChallenge", cat: "CRY", date: "2025-06-07", url: "https://github.com/Fonners/CTF-Walkthroughs/..." },
     ]
   },
   4: {
     spirits: [
-      // { name: "StartingPoint", cat: "MIS", date: "2025-01-11" },
+      // { name: "StartingPoint", cat: "MIS", date: "2025-01-11", url: "https://github.com/Fonners/CTF-Walkthroughs/..." },
     ]
   },
 };
@@ -1478,7 +1488,10 @@ function buildSpiritLists() {
         listEl.innerHTML = data.spirits.map(s =>
           `<div class="spirit-entry">
              <span class="se-cat">${s.cat}</span>
-             <span class="se-name">${s.name}</span>
+             <span class="se-name">${s.url
+               ? `<a class="se-link" href="${s.url}" target="_blank">${s.name}</a>`
+               : s.name
+             }</span>
              <span class="se-date">${s.date || '—'}</span>
            </div>`
         ).join('');
