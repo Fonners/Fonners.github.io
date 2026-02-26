@@ -85,7 +85,6 @@ body {
   100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
 }
 
-/* Generate 30 particles with varying positions and delays */
 .cursed-particle:nth-child(1) { left: 3%; animation-delay: 0s; animation-duration: 7s; }
 .cursed-particle:nth-child(2) { left: 8%; animation-delay: 1.2s; animation-duration: 9s; }
 .cursed-particle:nth-child(3) { left: 14%; animation-delay: 0.5s; animation-duration: 6s; }
@@ -114,7 +113,6 @@ body {
 
 /* ═══════════════════════════════════════════════════════════
    SUMMONING PORTAL — The hero "gate" animation
-   Inspired by Geto's curse summoning portals
    ═══════════════════════════════════════════════════════════ */
 .hero {
   position: relative;
@@ -144,7 +142,6 @@ body {
   50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
 }
 
-/* The black sphere — Geto's curse absorption orb */
 .absorption-sphere {
   position: relative;
   width: 160px;
@@ -157,17 +154,9 @@ body {
   top: 50%; left: 50%;
   width: 80px; height: 80px;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle at 35% 35%,
-    #2a1a3e 0%,
-    #0d0d15 40%,
-    #000 70%
-  );
+  background: radial-gradient(circle at 35% 35%, #2a1a3e 0%, #0d0d15 40%, #000 70%);
   border-radius: 50%;
-  box-shadow:
-    0 0 30px rgba(107,33,168,0.4),
-    0 0 60px rgba(107,33,168,0.2),
-    0 0 90px rgba(107,33,168,0.1),
-    inset 0 0 20px rgba(0,0,0,0.8);
+  box-shadow: 0 0 30px rgba(107,33,168,0.4), 0 0 60px rgba(107,33,168,0.2), 0 0 90px rgba(107,33,168,0.1), inset 0 0 20px rgba(0,0,0,0.8);
   animation: sphere-breathe 3s ease-in-out infinite;
 }
 
@@ -176,7 +165,6 @@ body {
   50% { transform: translate(-50%, -50%) scale(1.08); box-shadow: 0 0 40px rgba(139,92,246,0.5), 0 0 80px rgba(107,33,168,0.3), 0 0 120px rgba(107,33,168,0.15), inset 0 0 25px rgba(0,0,0,0.9); }
 }
 
-/* Orbiting cursed energy rings around the sphere */
 .sphere-ring {
   position: absolute;
   top: 50%; left: 50%;
@@ -211,7 +199,6 @@ body {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Absorption tendrils — wisps being pulled into the sphere */
 .tendril {
   position: absolute;
   top: 50%; left: 50%;
@@ -311,6 +298,95 @@ body {
   color: var(--smoke);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   CURSED ENERGY RESERVE — The CE bar below hero stats
+   ═══════════════════════════════════════════════════════════ */
+.ce-reserve {
+  width: 100%;
+  max-width: 480px;
+  margin-top: 36px;
+  opacity: 0;
+  animation: title-reveal 2s ease-out 1.3s forwards;
+}
+
+.ce-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.ce-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--smoke);
+}
+
+.ce-rank-badge {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 12px;
+  border: 1px solid;
+  transition: all 0.5s;
+}
+
+.ce-bar-outer {
+  width: 100%;
+  height: 6px;
+  background: rgba(139,92,246,0.08);
+  border: 1px solid rgba(139,92,246,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.ce-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--cursed-purple), var(--cursed-violet), var(--cursed-glow));
+  transition: width 2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  box-shadow: 0 0 12px rgba(139,92,246,0.4);
+}
+
+.ce-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 20px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3));
+  animation: ce-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes ce-shimmer {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.ce-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 6px;
+}
+
+.ce-points {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--cursed-glow);
+  letter-spacing: 0.05em;
+}
+
+.ce-next {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  color: var(--smoke);
+  letter-spacing: 0.05em;
+}
+
 /* Scroll indicator */
 .scroll-hint {
   position: absolute;
@@ -374,10 +450,7 @@ body {
   letter-spacing: 0.05em;
 }
 
-.nav-brand .jp {
-  color: var(--cursed-violet);
-  margin-right: 8px;
-}
+.nav-brand .jp { color: var(--cursed-violet); margin-right: 8px; }
 
 .nav-links {
   display: flex;
@@ -399,10 +472,8 @@ body {
 .nav-links a::after {
   content: '';
   position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
   background: var(--cursed-violet);
   transition: width 0.3s;
 }
@@ -443,8 +514,7 @@ body {
 }
 
 .section-header .divider {
-  width: 60px;
-  height: 1px;
+  width: 60px; height: 1px;
   background: linear-gradient(to right, transparent, var(--cursed-purple), transparent);
   margin: 20px auto 0;
 }
@@ -483,16 +553,13 @@ body {
 
 .filter-btn:hover::before { left: 100%; }
 
-.filter-btn:hover,
-.filter-btn.active {
+.filter-btn:hover, .filter-btn.active {
   border-color: var(--cursed-violet);
   color: var(--cursed-glow);
   box-shadow: 0 0 20px rgba(107,33,168,0.2);
 }
 
-.filter-btn.active {
-  background: rgba(107,33,168,0.15);
-}
+.filter-btn.active { background: rgba(107,33,168,0.15); }
 
 .filter-btn .grade-dot {
   display: inline-block;
@@ -503,7 +570,7 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   CURSE GRID — Each absorbed curse / CTF writeup
+   CURSE GRID
    ═══════════════════════════════════════════════════════════ */
 .curse-grid {
   max-width: 1200px;
@@ -513,10 +580,7 @@ body {
   z-index: 1;
 }
 
-/* Grade section grouping */
-.grade-section {
-  margin-bottom: 80px;
-}
+.grade-section { margin-bottom: 80px; }
 
 .grade-title {
   display: flex;
@@ -528,8 +592,7 @@ body {
 }
 
 .grade-title .grade-icon {
-  width: 32px;
-  height: 32px;
+  width: 32px; height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -557,7 +620,6 @@ body {
   margin-left: auto;
 }
 
-/* Individual curse card */
 .curse-card {
   position: relative;
   display: grid;
@@ -641,6 +703,15 @@ body {
   opacity: 0.6;
 }
 
+/* CE badge on each card */
+.curse-card .ce-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  color: var(--cursed-glow);
+  opacity: 0.6;
+}
+
 .curse-card .card-arrow {
   display: flex;
   align-items: center;
@@ -668,7 +739,6 @@ body {
 .grade-3 .dot { background: var(--grade-3); }
 .grade-4 .dot { background: var(--grade-4); }
 
-/* Grade badge on cards */
 .curse-card .grade-badge {
   font-family: 'Space Mono', monospace;
   font-size: 0.6rem;
@@ -688,7 +758,7 @@ body {
 .grade-4 .grade-badge { color: var(--grade-4); border-color: rgba(107,114,128,0.3); }
 
 /* ═══════════════════════════════════════════════════════════
-   RANKING EXPLAINER — Collapsible grade breakdown
+   RANKING EXPLAINER
    ═══════════════════════════════════════════════════════════ */
 .ranking-explainer {
   max-width: 720px;
@@ -745,7 +815,7 @@ body {
 }
 
 .ranking-body.open {
-  max-height: 800px;
+  max-height: 900px;
   padding: 24px 20px;
 }
 
@@ -800,6 +870,14 @@ body {
   opacity: 0.6;
 }
 
+.ranking-ce {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--cursed-glow);
+  opacity: 0.7;
+  margin-left: auto;
+}
+
 .ranking-diff {
   font-family: 'Space Mono', monospace;
   font-size: 0.6rem;
@@ -818,8 +896,7 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SUMMONING PORTAL ANIMATION — On-scroll section divider
-   Evokes Geto opening a portal to release curses
+   SUMMONING PORTAL ANIMATION
    ═══════════════════════════════════════════════════════════ */
 .portal-divider {
   position: relative;
@@ -846,24 +923,9 @@ body {
   animation: portal-spin 4s linear infinite;
 }
 
-.portal-ring:nth-child(1) {
-  width: 40px; height: 40px;
-  border-color: rgba(139,92,246,0.5);
-  animation-duration: 3s;
-}
-
-.portal-ring:nth-child(2) {
-  width: 70px; height: 70px;
-  border-color: rgba(107,33,168,0.3);
-  animation-duration: 5s;
-  animation-direction: reverse;
-}
-
-.portal-ring:nth-child(3) {
-  width: 100px; height: 100px;
-  border-color: rgba(107,33,168,0.15);
-  animation-duration: 7s;
-}
+.portal-ring:nth-child(1) { width: 40px; height: 40px; border-color: rgba(139,92,246,0.5); animation-duration: 3s; }
+.portal-ring:nth-child(2) { width: 70px; height: 70px; border-color: rgba(107,33,168,0.3); animation-duration: 5s; animation-direction: reverse; }
+.portal-ring:nth-child(3) { width: 100px; height: 100px; border-color: rgba(107,33,168,0.15); animation-duration: 7s; }
 
 .portal-center {
   position: absolute;
@@ -887,8 +949,7 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   UZUMAKI SECTION — Total collection stats
-   Inspired by Maximum: Uzumaki spiral
+   UZUMAKI SECTION
    ═══════════════════════════════════════════════════════════ */
 .uzumaki-section {
   position: relative;
@@ -917,29 +978,15 @@ body {
   animation: uzumaki-rotate 20s linear infinite;
 }
 
-.uzumaki-spiral:nth-child(2) {
-  width: 400px; height: 400px;
-  animation-duration: 30s;
-  animation-direction: reverse;
-  border-color: rgba(107,33,168,0.05);
-  border-right-color: rgba(139,92,246,0.2);
-}
-
-.uzumaki-spiral:nth-child(3) {
-  width: 500px; height: 500px;
-  animation-duration: 40s;
-  border-color: rgba(107,33,168,0.03);
-  border-bottom-color: rgba(139,92,246,0.15);
-}
+.uzumaki-spiral:nth-child(2) { width: 400px; height: 400px; animation-duration: 30s; animation-direction: reverse; border-color: rgba(107,33,168,0.05); border-right-color: rgba(139,92,246,0.2); }
+.uzumaki-spiral:nth-child(3) { width: 500px; height: 500px; animation-duration: 40s; border-color: rgba(107,33,168,0.03); border-bottom-color: rgba(139,92,246,0.15); }
 
 @keyframes uzumaki-rotate {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-.uzumaki-content {
-  position: relative;
-}
+.uzumaki-content { position: relative; }
 
 .uzumaki-content h2 {
   font-family: 'Noto Serif JP', serif;
@@ -994,12 +1041,9 @@ body {
 .gs-4 .gs-count { color: var(--grade-4); }
 
 /* ═══════════════════════════════════════════════════════════
-   EXTRACTED TECHNIQUES — Tools grid in Uzumaki section
+   EXTRACTED TECHNIQUES
    ═══════════════════════════════════════════════════════════ */
-.techniques-header {
-  margin-top: 60px;
-  margin-bottom: 32px;
-}
+.techniques-header { margin-top: 60px; margin-bottom: 32px; }
 
 .technique-sub-label {
   font-family: 'Space Mono', monospace;
@@ -1052,9 +1096,7 @@ body {
   margin-bottom: 4px;
 }
 
-.technique-card:hover .tech-name {
-  color: var(--cursed-glow);
-}
+.technique-card:hover .tech-name { color: var(--cursed-glow); }
 
 .technique-card .tech-type {
   font-family: 'Space Mono', monospace;
@@ -1074,7 +1116,7 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   FOOTER — The aftermath
+   FOOTER
    ═══════════════════════════════════════════════════════════ */
 footer {
   position: relative;
@@ -1103,20 +1145,9 @@ footer a:hover { color: var(--cursed-glow); }
 /* ═══════════════════════════════════════════════════════════
    EMPTY STATE
    ═══════════════════════════════════════════════════════════ */
-.empty-state {
-  text-align: center;
-  padding: 80px 20px;
-  display: none;
-}
-
+.empty-state { text-align: center; padding: 80px 20px; display: none; }
 .empty-state.visible { display: block; }
-
-.empty-state p {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
-  color: var(--smoke);
-  letter-spacing: 0.1em;
-}
+.empty-state p { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--smoke); letter-spacing: 0.1em; }
 
 /* ═══════════════════════════════════════════════════════════
    RESPONSIVE
@@ -1126,6 +1157,7 @@ footer a:hover { color: var(--cursed-glow); }
   .nav-links { gap: 16px; }
   .nav-links a { font-size: 0.6rem; }
   .curse-stats { gap: 24px; }
+  .ce-reserve { max-width: 320px; }
   .curse-card { grid-template-columns: 6px 1fr auto; }
   .curse-card .card-body { padding: 16px; }
   .curse-card .curse-meta { gap: 12px; }
@@ -1140,23 +1172,17 @@ footer a:hover { color: var(--cursed-glow); }
   .nav-links { display: none; }
   .hero-desc { padding: 0 20px; }
   .curse-stats { flex-wrap: wrap; gap: 16px; }
+  .ce-reserve { max-width: 280px; padding: 0 20px; }
   .grade-summary { gap: 16px; }
 }
 
 /* ═══════════════════════════════════════════════════════════
-   HIDDEN / UTILITY
+   UTILITY
    ═══════════════════════════════════════════════════════════ */
 .hidden { display: none !important; }
+.grade-section.filtered-out { display: none; }
+.curse-card.filtered-out { display: none; }
 
-.grade-section.filtered-out {
-  display: none;
-}
-
-.curse-card.filtered-out {
-  display: none;
-}
-
-/* Animation on scroll reveal */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -1173,30 +1199,18 @@ footer a:hover { color: var(--cursed-glow); }
 
 <!-- Cursed Energy Background Particles -->
 <div class="cursed-bg">
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
-  <div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
+  <div class="cursed-particle"></div><div class="cursed-particle"></div>
   <div class="cursed-particle"></div>
 </div>
 
@@ -1210,21 +1224,17 @@ footer a:hover { color: var(--cursed-glow); }
   </ul>
 </nav>
 
-<!-- Hero: The Absorption Sphere -->
+<!-- Hero -->
 <section class="hero">
   <div class="absorption-sphere">
     <div class="sphere-core"></div>
     <div class="sphere-ring"></div>
     <div class="sphere-ring"></div>
     <div class="sphere-ring"></div>
-    <div class="tendril"></div>
-    <div class="tendril"></div>
-    <div class="tendril"></div>
-    <div class="tendril"></div>
-    <div class="tendril"></div>
-    <div class="tendril"></div>
-    <div class="tendril"></div>
-    <div class="tendril"></div>
+    <div class="tendril"></div><div class="tendril"></div>
+    <div class="tendril"></div><div class="tendril"></div>
+    <div class="tendril"></div><div class="tendril"></div>
+    <div class="tendril"></div><div class="tendril"></div>
   </div>
 
   <h1 class="hero-title">呪霊操術</h1>
@@ -1240,8 +1250,27 @@ footer a:hover { color: var(--cursed-glow); }
       <span class="stat-label">Curses Absorbed</span>
     </div>
     <div class="stat">
+      <span class="stat-num" id="ce-count">0</span>
+      <span class="stat-label">Cursed Energy</span>
+    </div>
+    <div class="stat">
       <span class="stat-num" id="techniques-count">0</span>
       <span class="stat-label">Techniques Extracted</span>
+    </div>
+  </div>
+
+  <!-- Cursed Energy Reserve Bar -->
+  <div class="ce-reserve">
+    <div class="ce-header">
+      <span class="ce-label">Cursed Energy Reserve</span>
+      <span class="ce-rank-badge" id="ce-rank-badge">—</span>
+    </div>
+    <div class="ce-bar-outer">
+      <div class="ce-bar-fill" id="ce-bar-fill"></div>
+    </div>
+    <div class="ce-footer">
+      <span class="ce-points" id="ce-points-label">0 CE</span>
+      <span class="ce-next" id="ce-next-label"></span>
     </div>
   </div>
 
@@ -1278,13 +1307,14 @@ footer a:hover { color: var(--cursed-glow); }
     <div class="ranking-body" id="ranking-body">
       <p class="ranking-intro">
         Cursed spirits are graded by the threat they pose — the stronger the curse, the fewer sorcerers capable of exorcising it.
-        Each absorbed curse here is a conquered CTF challenge, graded by the skill and effort required to exploit it and capture the flag.
+        Each absorbed curse is a conquered CTF challenge, graded by skill and effort required to capture the flag.
+        The more powerful the curse absorbed, the more cursed energy added to your reserves.
       </p>
       <div class="ranking-grid">
         <div class="ranking-item">
           <div class="ranking-color" style="background:var(--grade-special)"></div>
           <div class="ranking-details">
-            <span class="ranking-name">Special Grade<span class="ranking-jp">特級</span></span>
+            <span class="ranking-name">Special Grade<span class="ranking-jp">特級</span><span class="ranking-ce">+1000 CE</span></span>
             <span class="ranking-diff">Insane / Expert</span>
             <span class="ranking-lore">Multi-stage exploitation chains, custom kernel exploits, zero-day-level reversing. These challenges require chaining multiple vulns across hardened systems — RCE through blind deserialization into container escapes, full binary exploitation with all mitigations enabled. The kind that takes days, not hours.</span>
           </div>
@@ -1292,7 +1322,7 @@ footer a:hover { color: var(--cursed-glow); }
         <div class="ranking-item">
           <div class="ranking-color" style="background:var(--grade-1)"></div>
           <div class="ranking-details">
-            <span class="ranking-name">Grade 1<span class="ranking-jp">１級</span></span>
+            <span class="ranking-name">Grade 1<span class="ranking-jp">１級</span><span class="ranking-ce">+500 CE</span></span>
             <span class="ranking-diff">Hard</span>
             <span class="ranking-lore">Heap exploitation, complex web chains, custom crypto attacks. You're writing your own shellcode, bypassing WAFs, or breaking flawed cryptographic implementations. Deep domain knowledge is non-negotiable — you need to know the internals to find the bug.</span>
           </div>
@@ -1300,7 +1330,7 @@ footer a:hover { color: var(--cursed-glow); }
         <div class="ranking-item">
           <div class="ranking-color" style="background:var(--grade-2)"></div>
           <div class="ranking-details">
-            <span class="ranking-name">Grade 2<span class="ranking-jp">２級</span></span>
+            <span class="ranking-name">Grade 2<span class="ranking-jp">２級</span><span class="ranking-ce">+200 CE</span></span>
             <span class="ranking-diff">Medium</span>
             <span class="ranking-lore">SQL injection with filters, buffer overflows with partial protections, RSA with known weaknesses. The vuln class is identifiable but exploitation isn't straightforward — you need solid fundamentals in networking, binary analysis, or web security to land the hit.</span>
           </div>
@@ -1308,7 +1338,7 @@ footer a:hover { color: var(--cursed-glow); }
         <div class="ranking-item">
           <div class="ranking-color" style="background:var(--grade-3)"></div>
           <div class="ranking-details">
-            <span class="ranking-name">Grade 3<span class="ranking-jp">３級</span></span>
+            <span class="ranking-name">Grade 3<span class="ranking-jp">３級</span><span class="ranking-ce">+100 CE</span></span>
             <span class="ranking-diff">Easy</span>
             <span class="ranking-lore">Classic XSS, basic directory traversal, simple forensics carving, known CVEs with public exploits. The attack surface is visible and the path is clear — good for practicing methodology, sharpening enumeration, and building muscle memory with your toolkit.</span>
           </div>
@@ -1316,7 +1346,7 @@ footer a:hover { color: var(--cursed-glow); }
         <div class="ranking-item">
           <div class="ranking-color" style="background:var(--grade-4)"></div>
           <div class="ranking-details">
-            <span class="ranking-name">Grade 4<span class="ranking-jp">４級</span></span>
+            <span class="ranking-name">Grade 4<span class="ranking-jp">４級</span><span class="ranking-ce">+50 CE</span></span>
             <span class="ranking-diff">Trivial</span>
             <span class="ranking-lore">Base64 decoding, strings on a binary, robots.txt, inspecting page source. Absorbed with practically no conditions attached — the entry-level warm-ups where you run the tool, read the output, and submit the flag. Everyone starts here.</span>
           </div>
@@ -1326,9 +1356,7 @@ footer a:hover { color: var(--cursed-glow); }
   </div>
 </section>
 
-<div class="curse-grid" id="curse-grid">
-  <!-- Curses are rendered here by JavaScript -->
-</div>
+<div class="curse-grid" id="curse-grid"></div>
 
 <div class="empty-state" id="empty-state">
   <p>No curses absorbed at this grade... yet.</p>
@@ -1344,7 +1372,7 @@ footer a:hover { color: var(--cursed-glow); }
   </div>
 </div>
 
-<!-- Uzumaki Section — Stats Overview -->
+<!-- Uzumaki Section -->
 <section id="uzumaki" class="uzumaki-section">
   <div class="uzumaki-bg">
     <div class="uzumaki-spiral"></div>
@@ -1358,18 +1386,13 @@ footer a:hover { color: var(--cursed-glow); }
       The culmination of all absorbed curses — condensed, refined, and unleashed.
       A complete overview of every spirit in the collection.
     </p>
-    <div class="grade-summary" id="grade-summary">
-      <!-- Rendered by JS -->
-    </div>
+    <div class="grade-summary" id="grade-summary"></div>
 
-    <!-- Extracted Techniques (Tools) -->
     <div class="techniques-header">
       <p class="technique-sub-label">Extracted Cursed Techniques</p>
       <p class="technique-sub-desc">抽出術式 — Tools absorbed from conquered curses</p>
     </div>
-    <div class="techniques-grid" id="techniques-grid">
-      <!-- Rendered by JS -->
-    </div>
+    <div class="techniques-grid" id="techniques-grid"></div>
   </div>
 </section>
 
@@ -1381,24 +1404,9 @@ footer a:hover { color: var(--cursed-glow); }
 
 <script>
 /* ═══════════════════════════════════════════════════════════
-   CURSE DATA — ADD YOUR CTF WRITEUPS HERE
-   
-   Each curse = one CTF challenge writeup.
-   
-   GRADES (difficulty mapping):
-     "special" = Insane / Special Grade
-     "1"       = Hard / Grade 1
-     "2"       = Medium / Grade 2
-     "3"       = Easy / Grade 3
-     "4"       = Trivial / Grade 4
-   
-   TYPE = CTF category: "web", "pwn", "crypto", "rev",
-          "forensics", "misc", "osint", "stego", "mobile", etc.
-   
-   To add a new curse, just add an object to this array:
+   CURSE DATA
    ═══════════════════════════════════════════════════════════ */
 const CURSES = [
-  // ── YOUR ABSORBED CURSES ────────────────────────────────
   {
     name: "Intigriti-0226",
     grade: "2",
@@ -1431,7 +1439,7 @@ const CURSES = [
     ctf: "VulnHub",
     url: "https://github.com/Fonners/CTF-Walkthroughs/tree/main/CTF-Fonners-2025/Tomato"
   },
-   {
+  {
     name: "DerpNStink",
     grade: "2",
     type: "misc",
@@ -1455,7 +1463,7 @@ const CURSES = [
     ctf: "VulnHub",
     url: "https://github.com/Fonners/CTF-Walkthroughs/tree/main/CTF-Fonners-2025/Darkhole1"
   },
-   {
+  {
     name: "Healthcare",
     grade: "2",
     type: "misc",
@@ -1463,7 +1471,7 @@ const CURSES = [
     ctf: "VulnHub",
     url: "https://github.com/Fonners/CTF-Walkthroughs/tree/main/CTF-Fonners-2025/Healthcare"
   },
-   {
+  {
     name: "FunBox11",
     grade: "4",
     type: "pwn",
@@ -1471,7 +1479,7 @@ const CURSES = [
     ctf: "VulnHub",
     url: "https://github.com/Fonners/CTF-Walkthroughs/tree/main/CTF-Fonners-2025/FunBox11"
   },
-   {
+  {
     name: "HF2019",
     grade: "4",
     type: "misc",
@@ -1479,15 +1487,7 @@ const CURSES = [
     ctf: "VulnHub",
     url: "https://github.com/Fonners/CTF-Walkthroughs/tree/main/CTF-Fonners-2025/HF2019"
   },
-   {
-    name: "Healthcare",
-    grade: "2",
-    type: "misc",
-    date: "2025-11-10",
-    ctf: "VulnHub",
-    url: "https://github.com/Fonners/CTF-Walkthroughs/tree/main/CTF-Fonners-2025/Healthcare"
-  },
-   {
+  {
     name: "Darkhole - 2",
     grade: "1",
     type: "misc",
@@ -1495,7 +1495,7 @@ const CURSES = [
     ctf: "VulnHub",
     url: "https://github.com/Fonners/CTF-Walkthroughs/tree/main/CTF-Fonners-2025/Darkhole2"
   },
-   {
+  {
     name: "Game Of Thrones - 7 Kingdoms",
     grade: "1",
     type: "misc",
@@ -1522,64 +1522,43 @@ const CURSES = [
 ];
 
 /* ═══════════════════════════════════════════════════════════
-   TECHNIQUES — YOUR TOOLS / SCRIPTS
-   
-   These are the "extracted cursed techniques" — tools you use
-   in CTFs. Think of it like Geto extracting innate techniques
-   from semi-grade 1+ curses via Uzumaki.
-   
-   Add your recon tools, custom scripts, exploits, etc:
+   TECHNIQUES
    ═══════════════════════════════════════════════════════════ */
 const TECHNIQUES = [
-  // ── EXAMPLE TECHNIQUES (replace with your own) ──────────
-  {
-    name: "Nmap",
-    type: "recon",           // "recon", "exploit", "script", "forensics", "crypto", "util", etc.
-    desc: "Network scanner & service enumeration",
-    url: ""                  // optional: link to your custom config, cheatsheet, or repo
-  },
-  {
-    name: "sqlmap",
-    type: "exploit",           // "recon", "exploit", "script", "forensics", "crypto", "util", etc.
-    desc: "SQLI exploit",
-    url: ""                  // optional: link to your custom config, cheatsheet, or repo
-  },
-  {
-    name: "Burp Suite",
-    type: "web",
-    desc: "Web proxy & vulnerability scanner",
-    url: ""
-  },
-   {
-    name: "Caido",
-    type: "web",
-    desc: "Web proxy & vulnerability scanner",
-    url: ""
-  },
-  {
-    name: "pwntools",
-    type: "exploit",
-    desc: "Python CTF framework for binary exploitation",
-    url: ""
-  },
-  {
-    name: "Custom SQLi Script",
-    type: "script",
-    desc: "Personal blind SQL injection automation",
-    url: "https://github.com/Fonners/tools/sqli-auto"
-  },
-  {
-    name: "Ghidra",
-    type: "rev",
-    desc: "NSA reverse engineering suite",
-    url: ""
-  },
-   {
-    name: "netdiscover",
-    type: "recon",
-    desc: "Network scanner",
-    url: ""
-  },
+  { name: "Nmap", type: "recon", desc: "Network scanner & service enumeration", url: "" },
+  { name: "sqlmap", type: "exploit", desc: "SQLI exploit", url: "" },
+  { name: "Burp Suite", type: "web", desc: "Web proxy & vulnerability scanner", url: "" },
+  { name: "Caido", type: "web", desc: "Web proxy & vulnerability scanner", url: "" },
+  { name: "pwntools", type: "exploit", desc: "Python CTF framework for binary exploitation", url: "" },
+  { name: "Custom SQLi Script", type: "script", desc: "Personal blind SQL injection automation", url: "https://github.com/Fonners/tools/sqli-auto" },
+  { name: "Ghidra", type: "rev", desc: "NSA reverse engineering suite", url: "" },
+  { name: "netdiscover", type: "recon", desc: "Network scanner", url: "" },
+];
+
+/* ═══════════════════════════════════════════════════════════
+   CURSED ENERGY CONFIG
+   
+   CE points per grade — the stronger the curse absorbed,
+   the more cursed energy added to your reserves.
+   
+   Sorcerer ranks are earned as total CE grows:
+   ═══════════════════════════════════════════════════════════ */
+const CE_POINTS = {
+  special: 5000,
+  "1": 2000,
+  "2": 1000,
+  "3": 500,
+  "4": 100,
+};
+
+const SORCERER_RANKS = [
+  { threshold: 0,     label: "Grade 4 Sorcerer",       jp: "四級術師", color: "var(--grade-4)" },
+  { threshold: 1500,   label: "Grade 3 Sorcerer",       jp: "三級術師", color: "var(--grade-3)" },
+  { threshold: 5000,  label: "Grade 2 Sorcerer",       jp: "二級術師", color: "var(--grade-2)" },
+  { threshold: 10000,  label: "Semi-Grade 1 Sorcerer",  jp: "準一級術師", color: "var(--grade-1)" },
+  { threshold: 20000,  label: "Grade 1 Sorcerer",       jp: "一級術師", color: "var(--grade-1)" },
+  { threshold: 50000,  label: "Special Grade Sorcerer",  jp: "特級術師", color: "var(--grade-special)" },
+  { threshold: 100000, label: "The Strongest",           jp: "最強", color: "var(--cursed-glow)" },
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -1594,6 +1573,28 @@ const GRADE_CONFIG = {
 };
 
 /* ═══════════════════════════════════════════════════════════
+   CE CALCULATION
+   ═══════════════════════════════════════════════════════════ */
+function getTotalCE() {
+  return CURSES.reduce((sum, c) => sum + (CE_POINTS[c.grade] || 0), 0);
+}
+
+function getSorcererRank(ce) {
+  let rank = SORCERER_RANKS[0];
+  for (const r of SORCERER_RANKS) {
+    if (ce >= r.threshold) rank = r;
+  }
+  return rank;
+}
+
+function getNextRank(ce) {
+  for (const r of SORCERER_RANKS) {
+    if (ce < r.threshold) return r;
+  }
+  return null;
+}
+
+/* ═══════════════════════════════════════════════════════════
    RENDER FUNCTIONS
    ═══════════════════════════════════════════════════════════ */
 function formatDate(dateStr) {
@@ -1606,17 +1607,14 @@ function renderCurses(filter = 'all') {
   const emptyState = document.getElementById('empty-state');
   grid.innerHTML = '';
 
-  // Group by grade
   const grouped = {};
   const gradeOrder = ['special', '1', '2', '3', '4'];
-
   gradeOrder.forEach(g => { grouped[g] = []; });
   CURSES.forEach(c => {
     if (!grouped[c.grade]) grouped[c.grade] = [];
     grouped[c.grade].push(c);
   });
 
-  // Sort each group by date (newest first)
   Object.keys(grouped).forEach(g => {
     grouped[g].sort((a, b) => new Date(b.date) - new Date(a.date));
   });
@@ -1629,17 +1627,16 @@ function renderCurses(filter = 'all') {
     if (filter !== 'all' && filter !== grade) return;
 
     totalVisible += curses.length;
-
     const section = document.createElement('div');
     section.className = `grade-section grade-${grade} reveal`;
-
     const config = GRADE_CONFIG[grade];
+    const cePerCurse = CE_POINTS[grade];
 
     section.innerHTML = `
       <div class="grade-title">
         <div class="grade-icon">${config.shortLabel}</div>
         <h3>${config.label}</h3>
-        <span class="count">${curses.length} curse${curses.length !== 1 ? 's' : ''} absorbed</span>
+        <span class="count">${curses.length} curse${curses.length !== 1 ? 's' : ''} absorbed &middot; ${curses.length * cePerCurse} CE</span>
       </div>
     `;
 
@@ -1657,9 +1654,10 @@ function renderCurses(filter = 'all') {
             <span class="meta-item"><span class="dot"></span>${curse.type.toUpperCase()}</span>
             <span class="meta-item">${formatDate(curse.date)}</span>
             <span class="meta-item">${curse.ctf}</span>
+            <span class="ce-value">+${cePerCurse} CE</span>
           </div>
         </div>
-        <div class="card-arrow">→</div>
+        <div class="card-arrow">\u2192</div>
       `;
       section.appendChild(card);
     });
@@ -1673,7 +1671,6 @@ function renderCurses(filter = 'all') {
     emptyState.classList.remove('visible');
   }
 
-  // Trigger reveal animations
   requestAnimationFrame(() => {
     document.querySelectorAll('.grade-section.reveal').forEach((el, i) => {
       setTimeout(() => el.classList.add('visible'), i * 150);
@@ -1684,9 +1681,14 @@ function renderCurses(filter = 'all') {
 function updateStats() {
   const total = CURSES.length;
   const techniques = TECHNIQUES.length;
+  const totalCE = getTotalCE();
 
   animateCounter('total-count', total);
+  animateCounter('ce-count', totalCE);
   animateCounter('techniques-count', techniques);
+
+  // CE bar
+  updateCEBar(totalCE);
 
   // Grade summary
   const summary = document.getElementById('grade-summary');
@@ -1704,8 +1706,35 @@ function updateStats() {
     `;
   }).join('');
 
-  // Render techniques
   renderTechniques();
+}
+
+function updateCEBar(totalCE) {
+  const rank = getSorcererRank(totalCE);
+  const next = getNextRank(totalCE);
+
+  // Rank badge
+  const badge = document.getElementById('ce-rank-badge');
+  badge.textContent = rank.jp + ' — ' + rank.label;
+  badge.style.color = rank.color;
+  badge.style.borderColor = rank.color;
+
+  // Progress bar
+  const fill = document.getElementById('ce-bar-fill');
+  const pointsLabel = document.getElementById('ce-points-label');
+  const nextLabel = document.getElementById('ce-next-label');
+
+  pointsLabel.textContent = totalCE.toLocaleString() + ' CE';
+
+  if (next) {
+    const prevThreshold = rank.threshold;
+    const progress = ((totalCE - prevThreshold) / (next.threshold - prevThreshold)) * 100;
+    setTimeout(() => { fill.style.width = Math.min(progress, 100) + '%'; }, 300);
+    nextLabel.textContent = (next.threshold - totalCE) + ' CE to ' + next.jp;
+  } else {
+    setTimeout(() => { fill.style.width = '100%'; }, 300);
+    nextLabel.textContent = 'Max rank achieved';
+  }
 }
 
 function renderTechniques() {
@@ -1726,15 +1755,19 @@ function renderTechniques() {
 function animateCounter(id, target) {
   const el = document.getElementById(id);
   let current = 0;
-  const step = Math.max(1, Math.floor(target / 30));
+  const duration = 1500;
+  const steps = 40;
+  const increment = target / steps;
+  let step = 0;
   const interval = setInterval(() => {
-    current += step;
-    if (current >= target) {
-      current = target;
+    step++;
+    current = Math.round(Math.min(increment * step, target));
+    el.textContent = current.toLocaleString();
+    if (step >= steps) {
+      el.textContent = target.toLocaleString();
       clearInterval(interval);
     }
-    el.textContent = current;
-  }, 40);
+  }, duration / steps);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1764,11 +1797,8 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
    ═══════════════════════════════════════════════════════════ */
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('nav');
-  if (window.scrollY > 80) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
+  if (window.scrollY > 80) { nav.classList.add('scrolled'); }
+  else { nav.classList.remove('scrolled'); }
 });
 
 /* ═══════════════════════════════════════════════════════════
@@ -1776,9 +1806,7 @@ window.addEventListener('scroll', () => {
    ═══════════════════════════════════════════════════════════ */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, { threshold: 0.1 });
 
