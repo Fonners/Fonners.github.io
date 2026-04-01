@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -16,264 +15,263 @@ body{background:var(--bg);color:var(--light);font-family:'JetBrains Mono',monosp
 ::selection{background:var(--green);color:var(--bg);}
 a{text-decoration:none;color:inherit;}
 
-.cursor-dot{width:8px;height:8px;background:var(–green);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:var(–glow-g);}
+.cursor-dot{width:8px;height:8px;background:var(--green);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:var(--glow-g);}
 .cursor-ring{width:28px;height:28px;border:1px solid rgba(0,255,136,0.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s;}
 .scanlines{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9990;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.04) 2px,rgba(0,0,0,0.04) 4px);}
-body::before{content:’’;position:fixed;top:0;left:0;width:100%;height:100%;background-image:url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.03’/%3E%3C/svg%3E”);pointer-events:none;z-index:0;opacity:.4;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4;}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(7,10,14,0.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,255,136,0.08);transition:border-color .4s;}
 nav.scrolled{border-bottom-color:rgba(0,255,136,0.2);}
-.nav-brand{font-family:‘Bebas Neue’,sans-serif;font-size:1.4rem;letter-spacing:.15em;color:var(–white);}
-.nav-brand span{color:var(–green);}
-.nav-status{display:flex;align-items:center;gap:8px;font-size:.7rem;letter-spacing:.15em;color:var(–green);text-transform:uppercase;}
-.nav-pulse{width:7px;height:7px;background:var(–green);border-radius:50%;animation:pulse 2s ease-in-out infinite;box-shadow:var(–glow-g);}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.15em;color:var(--white);}
+.nav-brand span{color:var(--green);}
+.nav-status{display:flex;align-items:center;gap:8px;font-size:.7rem;letter-spacing:.15em;color:var(--green);text-transform:uppercase;}
+.nav-pulse{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s ease-in-out infinite;box-shadow:var(--glow-g);}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.8);}}
 .nav-links{display:flex;gap:24px;list-style:none;}
-.nav-links a{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(–mid);transition:color .2s;}
-.nav-links a:hover{color:var(–green);}
+.nav-links a{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);transition:color .2s;}
+.nav-links a:hover{color:var(--green);}
 @media(max-width:768px){nav{padding:14px 20px;}.nav-links,.nav-status{display:none;}}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:120px 60px 80px;position:relative;z-index:1;overflow:hidden;}
-.hero::before{content:’’;position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,136,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
-.hero::after{content:’’;position:absolute;top:50%;left:30%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(0,255,136,0.04) 0%,transparent 70%);pointer-events:none;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,136,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.hero::after{content:'';position:absolute;top:50%;left:30%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(0,255,136,0.04) 0%,transparent 70%);pointer-events:none;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 
-.hero-terminal{font-size:.78rem;color:var(–dim);margin-bottom:24px;opacity:0;animation:fadeUp .6s ease forwards .3s;}
-.hero-terminal .p{color:var(–green);}.hero-terminal .c{color:var(–cyan);}
+.hero-terminal{font-size:.78rem;color:var(--dim);margin-bottom:24px;opacity:0;animation:fadeUp .6s ease forwards .3s;}
+.hero-terminal .p{color:var(--green);}.hero-terminal .c{color:var(--cyan);}
 
-.hero-access{display:inline-flex;align-items:center;gap:12px;padding:6px 18px;border:1px solid var(–green);color:var(–green);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .6s ease forwards .6s;position:relative;overflow:hidden;}
-.hero-access::before{content:’’;position:absolute;left:-100%;top:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,255,136,0.1),transparent);animation:sweep 2.5s ease-in-out infinite 1s;}
+.hero-access{display:inline-flex;align-items:center;gap:12px;padding:6px 18px;border:1px solid var(--green);color:var(--green);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .6s ease forwards .6s;position:relative;overflow:hidden;}
+.hero-access::before{content:'';position:absolute;left:-100%;top:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,255,136,0.1),transparent);animation:sweep 2.5s ease-in-out infinite 1s;}
 @keyframes sweep{to{left:200%;}}
-.dot-acc{width:6px;height:6px;background:var(–green);border-radius:50%;box-shadow:var(–glow-g);}
+.dot-acc{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:var(--glow-g);}
 
-.hero-name{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(4rem,10vw,9rem);line-height:.9;letter-spacing:.04em;opacity:0;animation:fadeUp .8s ease forwards .9s;}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,9rem);line-height:.9;letter-spacing:.04em;opacity:0;animation:fadeUp .8s ease forwards .9s;}
 /* BOTH name parts are green */
-.hero-name .first{color:var(–green);position:relative;display:inline-block;}
-.hero-name .last{color:var(–green);}
+.hero-name .first{color:var(--green);position:relative;display:inline-block;}
+.hero-name .last{color:var(--green);}
 .hero-name .first::before,.hero-name .first::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;animation:glitch 4s infinite;}
-.hero-name .first::before{clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);animation-delay:.1s;opacity:.6;color:var(–cyan);}
-.hero-name .first::after{clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);animation-delay:.3s;opacity:.6;color:var(–red);}
+.hero-name .first::before{clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);animation-delay:.1s;opacity:.6;color:var(--cyan);}
+.hero-name .first::after{clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);animation-delay:.3s;opacity:.6;color:var(--red);}
 @keyframes glitch{0%,90%,100%{transform:translate(0);}92%{transform:translate(-3px,1px);}94%{transform:translate(3px,-1px);}96%{transform:translate(-2px,2px);}98%{transform:translate(2px,-2px);}}
 
-.hero-subtitle{margin-top:20px;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(–mid);opacity:0;animation:fadeUp .6s ease forwards 1.2s;}
-.hero-subtitle .tag{color:var(–cyan);margin:0 8px;}
-.hero-desc{max-width:580px;margin-top:32px;font-size:.85rem;line-height:1.9;color:var(–mid);opacity:0;animation:fadeUp .6s ease forwards 1.5s;font-family:‘Chakra Petch’,sans-serif;font-weight:300;}
-.hero-desc strong{color:var(–light);font-weight:400;}
+.hero-subtitle{margin-top:20px;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);opacity:0;animation:fadeUp .6s ease forwards 1.2s;}
+.hero-subtitle .tag{color:var(--cyan);margin:0 8px;}
+.hero-desc{max-width:580px;margin-top:32px;font-size:.85rem;line-height:1.9;color:var(--mid);opacity:0;animation:fadeUp .6s ease forwards 1.5s;font-family:'Chakra Petch',sans-serif;font-weight:300;}
+.hero-desc strong{color:var(--light);font-weight:400;}
 
 .hero-stats{display:flex;gap:48px;margin-top:56px;opacity:0;animation:fadeUp .6s ease forwards 1.8s;flex-wrap:wrap;}
-.stat-block .num{font-family:‘Bebas Neue’,sans-serif;font-size:2.8rem;line-height:1;color:var(–green);letter-spacing:.05em;display:block;}
-.stat-block .lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(–dim);margin-top:4px;display:block;}
+.stat-block .num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;line-height:1;color:var(--green);letter-spacing:.05em;display:block;}
+.stat-block .lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:4px;display:block;}
 
 .hero-cta{display:flex;gap:16px;margin-top:48px;opacity:0;animation:fadeUp .6s ease forwards 2.1s;flex-wrap:wrap;}
-.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(–green);color:var(–bg);font-family:‘JetBrains Mono’,monospace;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all .25s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));}
-.btn-primary:hover{background:var(–green2);transform:translateY(-2px);box-shadow:var(–glow-g);}
-.btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border:1px solid rgba(0,255,136,0.3);color:var(–green);font-family:‘JetBrains Mono’,monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:all .25s;}
-.btn-secondary:hover{border-color:var(–green);background:rgba(0,255,136,0.06);transform:translateY(-2px);}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--green);color:var(--bg);font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all .25s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));}
+.btn-primary:hover{background:var(--green2);transform:translateY(-2px);box-shadow:var(--glow-g);}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border:1px solid rgba(0,255,136,0.3);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:all .25s;}
+.btn-secondary:hover{border-color:var(--green);background:rgba(0,255,136,0.06);transform:translateY(-2px);}
 
 .hex-float{position:absolute;right:8%;top:50%;transform:translateY(-50%);opacity:0;animation:fadeUp 1s ease forwards 2s;}
 .hex-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;}
-.hex-cell{width:32px;height:32px;border:1px solid rgba(0,255,136,0.1);display:flex;align-items:center;justify-content:center;font-size:.55rem;color:var(–dim);animation:hexBlink var(–dur) var(–delay) ease-in-out infinite;}
-@keyframes hexBlink{0%,100%{border-color:rgba(0,255,136,0.1);color:var(–dim);}50%{border-color:rgba(0,255,136,0.5);color:var(–green);background:rgba(0,255,136,0.04);}}
+.hex-cell{width:32px;height:32px;border:1px solid rgba(0,255,136,0.1);display:flex;align-items:center;justify-content:center;font-size:.55rem;color:var(--dim);animation:hexBlink var(--dur) var(--delay) ease-in-out infinite;}
+@keyframes hexBlink{0%,100%{border-color:rgba(0,255,136,0.1);color:var(--dim);}50%{border-color:rgba(0,255,136,0.5);color:var(--green);background:rgba(0,255,136,0.04);}}
 @media(max-width:900px){.hex-float{display:none;}}
 @media(max-width:600px){.hero{padding:100px 24px 60px;}.hero-stats{gap:24px;}}
 
 /* SECTION COMMONS */
 section{position:relative;z-index:1;padding:100px 60px;}
 @media(max-width:600px){section{padding:70px 24px;}}
-.section-label{display:inline-flex;align-items:center;gap:12px;font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(–green);margin-bottom:20px;}
-.section-label::before{content:’//’;opacity:.5;}
-.section-title{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(2.4rem,5vw,4rem);letter-spacing:.06em;color:var(–white);line-height:1;margin-bottom:12px;}
-.section-divider{width:60px;height:2px;background:linear-gradient(to right,var(–green),transparent);margin-bottom:60px;}
+.section-label{display:inline-flex;align-items:center;gap:12px;font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--green);margin-bottom:20px;}
+.section-label::before{content:'//';opacity:.5;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,5vw,4rem);letter-spacing:.06em;color:var(--white);line-height:1;margin-bottom:12px;}
+.section-divider{width:60px;height:2px;background:linear-gradient(to right,var(--green),transparent);margin-bottom:60px;}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
 /* ABOUT */
-#about{background:var(–bg2);}
+#about{background:var(--bg2);}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;max-width:1100px;}
 @media(max-width:800px){.about-grid{grid-template-columns:1fr;}}
-.terminal-window{background:var(–bg);border:1px solid rgba(0,255,136,0.12);overflow:hidden;}
+.terminal-window{background:var(--bg);border:1px solid rgba(0,255,136,0.12);overflow:hidden;}
 .terminal-bar{background:rgba(0,255,136,0.06);border-bottom:1px solid rgba(0,255,136,0.1);padding:10px 16px;display:flex;align-items:center;gap:8px;}
 .tbar-dot{width:10px;height:10px;border-radius:50%;}
-.tbar-dot.r{background:var(–red);}.tbar-dot.y{background:var(–amber);}.tbar-dot.g{background:var(–green);}
-.tbar-title{margin-left:8px;font-size:.65rem;letter-spacing:.1em;color:var(–dim);flex:1;text-align:center;}
+.tbar-dot.r{background:var(--red);}.tbar-dot.y{background:var(--amber);}.tbar-dot.g{background:var(--green);}
+.tbar-title{margin-left:8px;font-size:.65rem;letter-spacing:.1em;color:var(--dim);flex:1;text-align:center;}
 .terminal-body{padding:24px 20px;font-size:.78rem;line-height:2;}
-.t-line{display:flex;gap:10px;}.t-prompt{color:var(–green);flex-shrink:0;}.t-cmd{color:var(–cyan);}
-.t-out{color:var(–light);padding-left:20px;}.t-key{color:var(–amber);}.t-val{color:var(–green);}.t-blank{height:8px;}
+.t-line{display:flex;gap:10px;}.t-prompt{color:var(--green);flex-shrink:0;}.t-cmd{color:var(--cyan);}
+.t-out{color:var(--light);padding-left:20px;}.t-key{color:var(--amber);}.t-val{color:var(--green);}.t-blank{height:8px;}
 .about-info{display:flex;flex-direction:column;gap:28px;}
-.info-block .label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(–green);margin-bottom:8px;}
-.info-block p{font-family:‘Chakra Petch’,sans-serif;font-weight:300;font-size:.9rem;line-height:1.85;color:var(–mid);}
-.info-block p strong{color:var(–light);font-weight:400;}
-.philosophy-box{border-left:2px solid var(–green);padding:16px 20px;background:rgba(0,255,136,0.03);font-family:‘Chakra Petch’,sans-serif;font-style:italic;color:var(–light);font-size:.88rem;line-height:1.75;}
-.philosophy-box cite{display:block;margin-top:10px;font-size:.7rem;font-style:normal;color:var(–green);letter-spacing:.1em;}
+.info-block .label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+.info-block p{font-family:'Chakra Petch',sans-serif;font-weight:300;font-size:.9rem;line-height:1.85;color:var(--mid);}
+.info-block p strong{color:var(--light);font-weight:400;}
+.philosophy-box{border-left:2px solid var(--green);padding:16px 20px;background:rgba(0,255,136,0.03);font-family:'Chakra Petch',sans-serif;font-style:italic;color:var(--light);font-size:.88rem;line-height:1.75;}
+.philosophy-box cite{display:block;margin-top:10px;font-size:.7rem;font-style:normal;color:var(--green);letter-spacing:.1em;}
 
 /* SKILLS */
-#skills{background:var(–bg);}
+#skills{background:var(--bg);}
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1100px;}
-.skill-category{background:var(–bg2);border:1px solid rgba(0,255,136,0.08);padding:28px 24px;position:relative;overflow:hidden;transition:border-color .3s;}
+.skill-category{background:var(--bg2);border:1px solid rgba(0,255,136,0.08);padding:28px 24px;position:relative;overflow:hidden;transition:border-color .3s;}
 .skill-category:hover{border-color:rgba(0,255,136,0.25);}
-.skill-category::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(–green),transparent);opacity:0;transition:opacity .3s;}
+.skill-category::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),transparent);opacity:0;transition:opacity .3s;}
 .skill-category:hover::before{opacity:1;}
-.cat-title{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(–cyan);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.cat-title{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
 .skill-item{margin-bottom:16px;}
 .skill-meta{display:flex;justify-content:space-between;margin-bottom:6px;}
-.skill-name{font-size:.75rem;color:var(–light);}.skill-pct{font-size:.6rem;color:var(–green);}
+.skill-name{font-size:.75rem;color:var(--light);}.skill-pct{font-size:.6rem;color:var(--green);}
 .skill-bar{height:3px;background:rgba(255,255,255,0.05);overflow:hidden;}
-.skill-fill{height:100%;width:0%;background:linear-gradient(90deg,var(–green2),var(–green),var(–cyan));transition:width 1.5s cubic-bezier(.16,1,.3,1);position:relative;}
-.skill-fill::after{content:’’;position:absolute;right:0;top:0;width:4px;height:100%;background:white;opacity:.8;box-shadow:0 0 8px white;}
+.skill-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green2),var(--green),var(--cyan));transition:width 1.5s cubic-bezier(.16,1,.3,1);position:relative;}
+.skill-fill::after{content:'';position:absolute;right:0;top:0;width:4px;height:100%;background:white;opacity:.8;box-shadow:0 0 8px white;}
 .tool-tags{display:flex;flex-wrap:wrap;gap:8px;}
-.tool-tag{font-size:.6rem;letter-spacing:.08em;padding:4px 10px;border:1px solid rgba(0,255,136,0.15);color:var(–mid);transition:all .2s;cursor:default;}
-.tool-tag:hover{border-color:var(–green);color:var(–green);background:rgba(0,255,136,0.05);}
+.tool-tag{font-size:.6rem;letter-spacing:.08em;padding:4px 10px;border:1px solid rgba(0,255,136,0.15);color:var(--mid);transition:all .2s;cursor:default;}
+.tool-tag:hover{border-color:var(--green);color:var(--green);background:rgba(0,255,136,0.05);}
 
 /* TOOLS / RESOURCES */
-#tools{background:var(–bg2);}
-.tools-intro{font-family:‘Chakra Petch’,sans-serif;font-weight:300;font-size:.85rem;color:var(–mid);line-height:1.85;max-width:700px;margin-bottom:48px;}
-.tools-intro strong{color:var(–light);font-weight:400;}
+#tools{background:var(--bg2);}
+.tools-intro{font-family:'Chakra Petch',sans-serif;font-weight:300;font-size:.85rem;color:var(--mid);line-height:1.85;max-width:700px;margin-bottom:48px;}
+.tools-intro strong{color:var(--light);font-weight:400;}
 .tools-categories{display:flex;flex-direction:column;gap:48px;max-width:1100px;}
-.tools-cat-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(–green);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
-.tools-cat-label::after{content:’’;flex:1;height:1px;background:rgba(0,255,136,0.1);}
+.tools-cat-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.tools-cat-label::after{content:'';flex:1;height:1px;background:rgba(0,255,136,0.1);}
 .tools-grid-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
-.tool-link-card{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;background:var(–bg);border:1px solid rgba(255,255,255,0.05);transition:all .25s;}
+.tool-link-card{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;background:var(--bg);border:1px solid rgba(255,255,255,0.05);transition:all .25s;}
 .tool-link-card:hover{border-color:rgba(0,255,136,0.3);background:rgba(0,255,136,0.02);transform:translateY(-2px);}
 .tool-link-card a{display:flex;gap:14px;align-items:flex-start;width:100%;}
 .tlc-icon{font-size:1.1rem;flex-shrink:0;margin-top:2px;}
 .tlc-body{display:flex;flex-direction:column;gap:3px;}
-.tlc-name{font-size:.78rem;color:var(–white);}
-.tlc-desc{font-family:‘Chakra Petch’,sans-serif;font-size:.72rem;color:var(–mid);line-height:1.5;}
-.tlc-url{font-size:.58rem;color:var(–green);margin-top:4px;opacity:.7;}
+.tlc-name{font-size:.78rem;color:var(--white);}
+.tlc-desc{font-family:'Chakra Petch',sans-serif;font-size:.72rem;color:var(--mid);line-height:1.5;}
+.tlc-url{font-size:.58rem;color:var(--green);margin-top:4px;opacity:.7;}
 
 /* CERTIFICATIONS */
-#certs{background:var(–bg);}
+#certs{background:var(--bg);}
 .certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;max-width:1100px;}
-.cert-card{background:var(–bg2);border:1px solid rgba(255,255,255,0.05);padding:22px 22px 22px 28px;position:relative;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;gap:8px;}
+.cert-card{background:var(--bg2);border:1px solid rgba(255,255,255,0.05);padding:22px 22px 22px 28px;position:relative;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;gap:8px;}
 .cert-card:hover{transform:translateY(-4px);}
 .cert-card.done{border-color:rgba(0,255,136,0.15);}.cert-card.done:hover{box-shadow:0 8px 40px rgba(0,255,136,0.08);}
 .cert-card.progress{border-color:rgba(255,190,11,0.15);}.cert-card.progress:hover{box-shadow:0 8px 40px rgba(255,190,11,0.08);}
 .cert-card.target{border-color:rgba(0,212,255,0.1);}.cert-card.target:hover{box-shadow:0 8px 40px rgba(0,212,255,0.08);}
 .cert-status-bar{position:absolute;top:0;left:0;width:3px;height:100%;}
-.cert-card.done .cert-status-bar{background:var(–green);}
-.cert-card.progress .cert-status-bar{background:var(–amber);}
-.cert-card.target .cert-status-bar{background:var(–cyan);}
+.cert-card.done .cert-status-bar{background:var(--green);}
+.cert-card.progress .cert-status-bar{background:var(--amber);}
+.cert-card.target .cert-status-bar{background:var(--cyan);}
 .cert-badge{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;width:fit-content;}
-.cert-card.done .cert-badge{background:rgba(0,255,136,0.08);color:var(–green);border:1px solid rgba(0,255,136,0.2);}
-.cert-card.progress .cert-badge{background:rgba(255,190,11,0.08);color:var(–amber);border:1px solid rgba(255,190,11,0.2);}
-.cert-card.target .cert-badge{background:rgba(0,212,255,0.08);color:var(–cyan);border:1px solid rgba(0,212,255,0.2);}
-.cert-name{font-family:‘Chakra Petch’,sans-serif;font-size:.9rem;font-weight:600;color:var(–white);line-height:1.3;}
-.cert-issuer{font-size:.6rem;letter-spacing:.1em;color:var(–dim);text-transform:uppercase;}
+.cert-card.done .cert-badge{background:rgba(0,255,136,0.08);color:var(--green);border:1px solid rgba(0,255,136,0.2);}
+.cert-card.progress .cert-badge{background:rgba(255,190,11,0.08);color:var(--amber);border:1px solid rgba(255,190,11,0.2);}
+.cert-card.target .cert-badge{background:rgba(0,212,255,0.08);color:var(--cyan);border:1px solid rgba(0,212,255,0.2);}
+.cert-name{font-family:'Chakra Petch',sans-serif;font-size:.9rem;font-weight:600;color:var(--white);line-height:1.3;}
+.cert-issuer{font-size:.6rem;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;}
 .cert-date{font-size:.58rem;color:rgba(0,255,136,0.6);letter-spacing:.06em;}
 .cert-progress-bar{margin-top:4px;height:2px;background:rgba(255,255,255,0.05);}
-.cert-progress-fill{height:100%;background:var(–amber);width:0%;transition:width 1.5s ease;}
+.cert-progress-fill{height:100%;background:var(--amber);width:0%;transition:width 1.5s ease;}
 
 /* EXPERIENCE TIMELINE */
-#experience{background:var(–bg2);}
+#experience{background:var(--bg2);}
 .exp-timeline{position:relative;max-width:900px;padding-left:56px;}
-.exp-timeline::before{content:’’;position:absolute;left:18px;top:10px;bottom:0;width:1px;background:linear-gradient(to bottom,var(–green),rgba(0,255,136,0.05));}
+.exp-timeline::before{content:'';position:absolute;left:18px;top:10px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--green),rgba(0,255,136,0.05));}
 .exp-item{position:relative;margin-bottom:52px;opacity:0;transform:translateX(-20px);transition:opacity .6s ease,transform .6s ease;}
 .exp-item.visible{opacity:1;transform:translateX(0);}
-.exp-item::before{content:’’;position:absolute;left:-45px;top:9px;width:13px;height:13px;border:2px solid var(–green);background:var(–bg2);border-radius:50%;transition:background .3s,box-shadow .3s;}
-.exp-item.current::before{background:var(–green);box-shadow:var(–glow-g);animation:nodeGlow 2s ease-in-out infinite;}
+.exp-item::before{content:'';position:absolute;left:-45px;top:9px;width:13px;height:13px;border:2px solid var(--green);background:var(--bg2);border-radius:50%;transition:background .3s,box-shadow .3s;}
+.exp-item.current::before{background:var(--green);box-shadow:var(--glow-g);animation:nodeGlow 2s ease-in-out infinite;}
 @keyframes nodeGlow{0%,100%{box-shadow:0 0 8px rgba(0,255,136,0.5);}50%{box-shadow:0 0 22px rgba(0,255,136,1);}}
-.exp-item.edu-item::before{border-color:var(–cyan);background:rgba(0,212,255,0.15);}
+.exp-item.edu-item::before{border-color:var(--cyan);background:rgba(0,212,255,0.15);}
 .exp-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:5px;}
-.exp-role{font-family:‘Chakra Petch’,sans-serif;font-size:1rem;font-weight:600;color:var(–white);}
-.exp-dates{font-size:.6rem;letter-spacing:.12em;color:var(–dim);white-space:nowrap;padding-top:4px;}
-.exp-company{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(–green);margin-bottom:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-.exp-company.edu-co{color:var(–cyan);}
-.type-badge{font-size:.53rem;padding:2px 7px;border:1px solid rgba(0,255,136,0.2);color:var(–dim);letter-spacing:.08em;}
+.exp-role{font-family:'Chakra Petch',sans-serif;font-size:1rem;font-weight:600;color:var(--white);}
+.exp-dates{font-size:.6rem;letter-spacing:.12em;color:var(--dim);white-space:nowrap;padding-top:4px;}
+.exp-company{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.exp-company.edu-co{color:var(--cyan);}
+.type-badge{font-size:.53rem;padding:2px 7px;border:1px solid rgba(0,255,136,0.2);color:var(--dim);letter-spacing:.08em;}
 .type-badge.edu-b{border-color:rgba(0,212,255,0.2);color:rgba(0,212,255,0.6);}
-.exp-desc{font-family:‘Chakra Petch’,sans-serif;font-weight:300;font-size:.82rem;color:var(–mid);line-height:1.75;}
-.exp-desc strong{color:var(–light);font-weight:400;}
+.exp-desc{font-family:'Chakra Petch',sans-serif;font-weight:300;font-size:.82rem;color:var(--mid);line-height:1.75;}
+.exp-desc strong{color:var(--light);font-weight:400;}
 .exp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
-.exp-tag{font-size:.57rem;letter-spacing:.08em;padding:2px 8px;border:1px solid rgba(255,255,255,0.07);color:var(–dim);}
-.exp-highlight{display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 12px;background:rgba(0,255,136,0.04);border:1px solid rgba(0,255,136,0.12);font-size:.72rem;color:var(–green);}
+.exp-tag{font-size:.57rem;letter-spacing:.08em;padding:2px 8px;border:1px solid rgba(255,255,255,0.07);color:var(--dim);}
+.exp-highlight{display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 12px;background:rgba(0,255,136,0.04);border:1px solid rgba(0,255,136,0.12);font-size:.72rem;color:var(--green);}
 
 /* CTF */
-#ctf{background:var(–bg);}
+#ctf{background:var(--bg);}
 .ctf-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1100px;}
 @media(max-width:700px){.ctf-grid{grid-template-columns:1fr;}}
-.platform-card{background:var(–bg2);border:1px solid rgba(255,255,255,0.05);padding:32px;transition:all .3s;position:relative;overflow:hidden;}
+.platform-card{background:var(--bg2);border:1px solid rgba(255,255,255,0.05);padding:32px;transition:all .3s;position:relative;overflow:hidden;}
 .platform-card:hover{border-color:rgba(0,255,136,0.2);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.3);}
-.platform-card::after{content:’’;position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(–green),transparent);opacity:0;transition:opacity .3s;}
+.platform-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;transition:opacity .3s;}
 .platform-card:hover::after{opacity:1;}
 .platform-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
-.platform-name{font-family:‘Bebas Neue’,sans-serif;font-size:1.8rem;letter-spacing:.08em;color:var(–white);}
+.platform-name{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.08em;color:var(--white);}
 .plat-badge{padding:4px 12px;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;}
-.badge-active{background:rgba(0,255,136,0.1);color:var(–green);border:1px solid rgba(0,255,136,0.3);}
-.badge-progress{background:rgba(255,190,11,0.1);color:var(–amber);border:1px solid rgba(255,190,11,0.3);}
+.badge-active{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.3);}
+.badge-progress{background:rgba(255,190,11,0.1);color:var(--amber);border:1px solid rgba(255,190,11,0.3);}
 .platform-stats{display:flex;gap:24px;margin-bottom:20px;}
-.p-stat .pn{font-family:‘Bebas Neue’,sans-serif;font-size:2rem;color:var(–green);}
-.p-stat .pl{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(–dim);}
-.platform-desc{font-family:‘Chakra Petch’,sans-serif;font-weight:300;font-size:.82rem;color:var(–mid);line-height:1.75;}
-.wt-title{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(–dim);margin-bottom:16px;margin-top:48px;}
+.p-stat .pn{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--green);}
+.p-stat .pl{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);}
+.platform-desc{font-family:'Chakra Petch',sans-serif;font-weight:300;font-size:.82rem;color:var(--mid);line-height:1.75;}
+.wt-title{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;margin-top:48px;}
 .wt-list{display:flex;flex-direction:column;gap:8px;max-width:1100px;}
-.wt-item{display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(–bg2);border:1px solid rgba(255,255,255,0.04);transition:all .25s;}
+.wt-item{display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--bg2);border:1px solid rgba(255,255,255,0.04);transition:all .25s;}
 .wt-item:hover{border-color:rgba(0,255,136,0.2);transform:translateX(4px);}
-.wt-num{font-size:.65rem;color:var(–dim);min-width:24px;}.wt-name{font-size:.8rem;color:var(–light);flex:1;}
+.wt-num{font-size:.65rem;color:var(--dim);min-width:24px;}.wt-name{font-size:.8rem;color:var(--light);flex:1;}
 .wt-diff{font-size:.6rem;padding:2px 8px;border:1px solid;}
-.diff-easy{color:var(–green);border-color:rgba(0,255,136,0.3);}
-.diff-medium{color:var(–amber);border-color:rgba(255,190,11,0.3);}
-.diff-hard{color:var(–red);border-color:rgba(255,45,85,0.3);}
-.wt-arrow{color:var(–dim);font-size:.8rem;transition:all .2s;}.wt-item:hover .wt-arrow{color:var(–green);transform:translateX(4px);}
+.diff-easy{color:var(--green);border-color:rgba(0,255,136,0.3);}
+.diff-medium{color:var(--amber);border-color:rgba(255,190,11,0.3);}
+.diff-hard{color:var(--red);border-color:rgba(255,45,85,0.3);}
+.wt-arrow{color:var(--dim);font-size:.8rem;transition:all .2s;}.wt-item:hover .wt-arrow{color:var(--green);transform:translateX(4px);}
 
 /* PROJECTS */
-#projects{background:var(–bg2);}
+#projects{background:var(--bg2);}
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1100px;}
-.project-card{background:var(–bg);border:1px solid rgba(255,255,255,0.05);padding:28px;position:relative;transition:all .3s;display:flex;flex-direction:column;gap:14px;}
+.project-card{background:var(--bg);border:1px solid rgba(255,255,255,0.05);padding:28px;position:relative;transition:all .3s;display:flex;flex-direction:column;gap:14px;}
 .project-card:hover{border-color:rgba(0,212,255,0.2);box-shadow:0 8px 40px rgba(0,212,255,0.06);transform:translateY(-4px);}
-.project-lang{display:flex;align-items:center;gap:8px;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(–dim);}
+.project-lang{display:flex;align-items:center;gap:8px;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);}
 .lang-dot{width:8px;height:8px;border-radius:50%;}.py{background:#3572a5;}.sh{background:#89e051;}
-.project-title{font-family:‘Chakra Petch’,sans-serif;font-size:1rem;font-weight:600;color:var(–white);}
-.project-title a:hover{color:var(–cyan);}
-.project-desc{font-family:‘Chakra Petch’,sans-serif;font-weight:300;font-size:.82rem;color:var(–mid);line-height:1.75;flex:1;}
+.project-title{font-family:'Chakra Petch',sans-serif;font-size:1rem;font-weight:600;color:var(--white);}
+.project-title a:hover{color:var(--cyan);}
+.project-desc{font-family:'Chakra Petch',sans-serif;font-weight:300;font-size:.82rem;color:var(--mid);line-height:1.75;flex:1;}
 .project-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);}
-.project-link{display:flex;align-items:center;gap:6px;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(–cyan);transition:gap .2s;}
+.project-link{display:flex;align-items:center;gap:6px;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);transition:gap .2s;}
 .project-link:hover{gap:10px;}
-.project-tag{font-size:.57rem;padding:2px 8px;border:1px solid rgba(0,255,136,0.15);color:var(–dim);}
+.project-tag{font-size:.57rem;padding:2px 8px;border:1px solid rgba(0,255,136,0.15);color:var(--dim);}
 
 /* GOALS */
-#goals{background:var(–bg);}
+#goals{background:var(--bg);}
 .roadmap{position:relative;max-width:900px;padding-left:56px;}
-.roadmap::before{content:’’;position:absolute;left:18px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(–green),transparent);}
+.roadmap::before{content:'';position:absolute;left:18px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--green),transparent);}
 .roadmap-item{position:relative;margin-bottom:48px;opacity:0;transform:translateX(-20px);transition:opacity .6s ease,transform .6s ease;}
 .roadmap-item.visible{opacity:1;transform:translateX(0);}
-.roadmap-item::before{content:’’;position:absolute;left:-45px;top:8px;width:13px;height:13px;border:2px solid var(–green);background:var(–bg);border-radius:50%;}
-.roadmap-item.done::before{background:var(–green);box-shadow:var(–glow-g);}
-.roadmap-item.active::before{border-color:var(–amber);animation:activePulse 1.5s ease-in-out infinite;}
+.roadmap-item::before{content:'';position:absolute;left:-45px;top:8px;width:13px;height:13px;border:2px solid var(--green);background:var(--bg);border-radius:50%;}
+.roadmap-item.done::before{background:var(--green);box-shadow:var(--glow-g);}
+.roadmap-item.active::before{border-color:var(--amber);animation:activePulse 1.5s ease-in-out infinite;}
 @keyframes activePulse{0%,100%{box-shadow:0 0 8px rgba(255,190,11,.4);}50%{box-shadow:0 0 20px rgba(255,190,11,.8);}}
-.roadmap-year{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(–dim);margin-bottom:6px;}
-.roadmap-heading{font-family:‘Chakra Petch’,sans-serif;font-size:1rem;font-weight:600;color:var(–white);margin-bottom:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.roadmap-year{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:6px;}
+.roadmap-heading{font-family:'Chakra Petch',sans-serif;font-size:1rem;font-weight:600;color:var(--white);margin-bottom:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .rm-tag{font-size:.53rem;letter-spacing:.13em;padding:2px 8px;border:1px solid;}
-.tag-done{color:var(–green);border-color:rgba(0,255,136,0.3);}
-.tag-active{color:var(–amber);border-color:rgba(255,190,11,0.3);}
-.tag-planned{color:var(–cyan);border-color:rgba(0,212,255,0.3);}
-.roadmap-desc{font-family:‘Chakra Petch’,sans-serif;font-weight:300;font-size:.82rem;color:var(–mid);line-height:1.75;}
-.roadmap-desc strong{color:var(–light);font-weight:400;}
+.tag-done{color:var(--green);border-color:rgba(0,255,136,0.3);}
+.tag-active{color:var(--amber);border-color:rgba(255,190,11,0.3);}
+.tag-planned{color:var(--cyan);border-color:rgba(0,212,255,0.3);}
+.roadmap-desc{font-family:'Chakra Petch',sans-serif;font-weight:300;font-size:.82rem;color:var(--mid);line-height:1.75;}
+.roadmap-desc strong{color:var(--light);font-weight:400;}
 
 /* CONTACT */
-#contact{background:var(–bg2);text-align:center;}
-.contact-terminal{max-width:620px;margin:0 auto;background:var(–bg);border:1px solid rgba(0,255,136,0.15);overflow:hidden;}
+#contact{background:var(--bg2);text-align:center;}
+.contact-terminal{max-width:620px;margin:0 auto;background:var(--bg);border:1px solid rgba(0,255,136,0.15);overflow:hidden;}
 .ct-bar{background:rgba(0,255,136,0.06);border-bottom:1px solid rgba(0,255,136,0.1);padding:10px 16px;display:flex;align-items:center;gap:8px;text-align:left;}
-.ct-bar-title{flex:1;text-align:center;font-size:.65rem;letter-spacing:.12em;color:var(–dim);}
+.ct-bar-title{flex:1;text-align:center;font-size:.65rem;letter-spacing:.12em;color:var(--dim);}
 .ct-body{padding:40px 32px;}
-.ct-big{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(1.8rem,5vw,3rem);letter-spacing:.08em;color:var(–white);line-height:1.1;margin-bottom:16px;}
-.ct-big span{color:var(–green);}
-.ct-body p{font-family:‘Chakra Petch’,sans-serif;font-weight:300;font-size:.85rem;color:var(–mid);line-height:1.75;margin-bottom:36px;max-width:440px;margin-left:auto;margin-right:auto;}
+.ct-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,5vw,3rem);letter-spacing:.08em;color:var(--white);line-height:1.1;margin-bottom:16px;}
+.ct-big span{color:var(--green);}
+.ct-body p{font-family:'Chakra Petch',sans-serif;font-weight:300;font-size:.85rem;color:var(--mid);line-height:1.75;margin-bottom:36px;max-width:440px;margin-left:auto;margin-right:auto;}
 .contact-links{display:flex;flex-direction:column;gap:10px;max-width:380px;margin:0 auto;}
 .contact-link{display:flex;align-items:center;gap:16px;padding:13px 18px;border:1px solid rgba(255,255,255,0.06);transition:all .25s;}
 .contact-link:hover{border-color:rgba(0,255,136,0.3);background:rgba(0,255,136,0.03);transform:translateY(-2px);}
 .cl-icon{font-size:1rem;width:26px;text-align:center;flex-shrink:0;}
-.cl-label{font-size:.75rem;letter-spacing:.08em;color:var(–light);flex:1;text-align:left;}
-.cl-val{font-size:.65rem;color:var(–green);}
+.cl-label{font-size:.75rem;letter-spacing:.08em;color:var(--light);flex:1;text-align:left;}
+.cl-val{font-size:.65rem;color:var(--green);}
 
-footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:14px;}
-.footer-brand{font-family:‘Bebas Neue’,sans-serif;font-size:1rem;letter-spacing:.15em;color:var(–white);}
-.footer-brand span{color:var(–green);}
-.footer-copy{font-size:.58rem;letter-spacing:.08em;color:var(–dim);}
-.footer-copy span{color:var(–green);}
+footer{background:var(--bg);border-top:1px solid rgba(0,255,136,0.06);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:14px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.15em;color:var(--white);}
+.footer-brand span{color:var(--green);}
+.footer-copy{font-size:.58rem;letter-spacing:.08em;color:var(--dim);}
+.footer-copy span{color:var(--green);}
 .matrix-rain{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;opacity:.025;}
 </style>
-
 </head>
 <body>
 <div class="scanlines"></div>
@@ -282,7 +280,6 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 <canvas class="matrix-rain" id="mc"></canvas>
 
 <!-- NAV -->
-
 <nav id="nav">
   <a href="#" class="nav-brand"><span>0dy5</span>5eu5</a>
   <div class="nav-status"><div class="nav-pulse"></div>ONLINE · PORTO, PT</div>
@@ -299,7 +296,6 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 </nav>
 
 <!-- HERO -->
-
 <section class="hero" id="home">
   <div class="hero-terminal"><span class="p">root@kali:~#</span>&nbsp;<span class="c">./boot_sequence.sh --target portfolio --mode recon</span></div>
   <div class="hero-access"><div class="dot-acc"></div>ACCESS GRANTED — CLEARANCE LEVEL: ALPHA<div class="dot-acc"></div></div>
@@ -327,7 +323,6 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 </section>
 
 <!-- ABOUT -->
-
 <section id="about">
   <div class="section-label">Target Identified</div>
   <h2 class="section-title">DOSSIER</h2>
@@ -370,7 +365,6 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 </section>
 
 <!-- SKILLS -->
-
 <section id="skills">
   <div class="section-label">Capability Matrix</div>
   <h2 class="section-title">SKILLS</h2>
@@ -414,7 +408,6 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 </section>
 
 <!-- TOOLS / RESOURCE VAULT -->
-
 <section id="tools">
   <div class="section-label">Resource Vault</div>
   <h2 class="section-title">HELPFUL TOOLS</h2>
@@ -422,45 +415,42 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
   <p class="tools-intro reveal">A curated arsenal of <strong>cheat sheets, references, and platforms</strong> I rely on daily. Click any card to open directly — battle-tested resources for web exploitation, network attacks, and beyond.</p>
   <div class="tools-categories">
 
-```
-<div class="reveal">
-  <div class="tools-cat-label">WEB EXPLOITATION</div>
-  <div class="tools-grid-links">
-    <div class="tool-link-card"><a href="https://portswigger.net/web-security/cross-site-scripting/cheat-sheet" target="_blank"><div class="tlc-icon">💉</div><div class="tlc-body"><div class="tlc-name">PortSwigger XSS Cheat Sheet</div><div class="tlc-desc">Full XSS payload reference — filter bypasses, event handlers, all encodings.</div><div class="tlc-url">portswigger.net › xss › cheat-sheet</div></div></a></div>
-    <div class="tool-link-card"><a href="https://portswigger.net/web-security/sql-injection/cheat-sheet" target="_blank"><div class="tlc-icon">🗄️</div><div class="tlc-body"><div class="tlc-name">PortSwigger SQLi Cheat Sheet</div><div class="tlc-desc">SQL injection reference: MySQL, MSSQL, Oracle, PostgreSQL payloads.</div><div class="tlc-url">portswigger.net › sqli › cheat-sheet</div></div></a></div>
-    <div class="tool-link-card"><a href="https://github.com/swisskyrepo/PayloadsAllTheThings" target="_blank"><div class="tlc-icon">📦</div><div class="tlc-body"><div class="tlc-name">PayloadsAllTheThings</div><div class="tlc-desc">Massive payload collection for every web vulnerability class. Essential.</div><div class="tlc-url">github.com › swisskyrepo › PayloadsAllTheThings</div></div></a></div>
-    <div class="tool-link-card"><a href="https://portswigger.net/web-security" target="_blank"><div class="tlc-icon">🎓</div><div class="tlc-body"><div class="tlc-name">PortSwigger Web Security Academy</div><div class="tlc-desc">Free labs for every web attack. Currently grinding toward BSCP.</div><div class="tlc-url">portswigger.net/web-security</div></div></a></div>
-    <div class="tool-link-card"><a href="https://cheatsheetseries.owasp.org/" target="_blank"><div class="tlc-icon">🛡️</div><div class="tlc-body"><div class="tlc-name">OWASP Cheat Sheet Series</div><div class="tlc-desc">Official OWASP attack and defense cheat sheets. Know both sides.</div><div class="tlc-url">cheatsheetseries.owasp.org</div></div></a></div>
-    <div class="tool-link-card"><a href="https://hacktricks.xyz/" target="_blank"><div class="tlc-icon">🎩</div><div class="tlc-body"><div class="tlc-name">HackTricks</div><div class="tlc-desc">Pentesting bible — web, network, AD, cloud, mobile. Always open.</div><div class="tlc-url">hacktricks.xyz</div></div></a></div>
-  </div>
-</div>
+    <div class="reveal">
+      <div class="tools-cat-label">WEB EXPLOITATION</div>
+      <div class="tools-grid-links">
+        <div class="tool-link-card"><a href="https://portswigger.net/web-security/cross-site-scripting/cheat-sheet" target="_blank"><div class="tlc-icon">💉</div><div class="tlc-body"><div class="tlc-name">PortSwigger XSS Cheat Sheet</div><div class="tlc-desc">Full XSS payload reference — filter bypasses, event handlers, all encodings.</div><div class="tlc-url">portswigger.net › xss › cheat-sheet</div></div></a></div>
+        <div class="tool-link-card"><a href="https://portswigger.net/web-security/sql-injection/cheat-sheet" target="_blank"><div class="tlc-icon">🗄️</div><div class="tlc-body"><div class="tlc-name">PortSwigger SQLi Cheat Sheet</div><div class="tlc-desc">SQL injection reference: MySQL, MSSQL, Oracle, PostgreSQL payloads.</div><div class="tlc-url">portswigger.net › sqli › cheat-sheet</div></div></a></div>
+        <div class="tool-link-card"><a href="https://github.com/swisskyrepo/PayloadsAllTheThings" target="_blank"><div class="tlc-icon">📦</div><div class="tlc-body"><div class="tlc-name">PayloadsAllTheThings</div><div class="tlc-desc">Massive payload collection for every web vulnerability class. Essential.</div><div class="tlc-url">github.com › swisskyrepo › PayloadsAllTheThings</div></div></a></div>
+        <div class="tool-link-card"><a href="https://portswigger.net/web-security" target="_blank"><div class="tlc-icon">🎓</div><div class="tlc-body"><div class="tlc-name">PortSwigger Web Security Academy</div><div class="tlc-desc">Free labs for every web attack. Currently grinding toward BSCP.</div><div class="tlc-url">portswigger.net/web-security</div></div></a></div>
+        <div class="tool-link-card"><a href="https://cheatsheetseries.owasp.org/" target="_blank"><div class="tlc-icon">🛡️</div><div class="tlc-body"><div class="tlc-name">OWASP Cheat Sheet Series</div><div class="tlc-desc">Official OWASP attack and defense cheat sheets. Know both sides.</div><div class="tlc-url">cheatsheetseries.owasp.org</div></div></a></div>
+        <div class="tool-link-card"><a href="https://hacktricks.xyz/" target="_blank"><div class="tlc-icon">🎩</div><div class="tlc-body"><div class="tlc-name">HackTricks</div><div class="tlc-desc">Pentesting bible — web, network, AD, cloud, mobile. Always open.</div><div class="tlc-url">hacktricks.xyz</div></div></a></div>
+      </div>
+    </div>
 
-<div class="reveal">
-  <div class="tools-cat-label">NETWORK & PRIVILEGE ESCALATION</div>
-  <div class="tools-grid-links">
-    <div class="tool-link-card"><a href="https://gtfobins.github.io/" target="_blank"><div class="tlc-icon">⬆️</div><div class="tlc-body"><div class="tlc-name">GTFOBins</div><div class="tlc-desc">Unix binaries to bypass local security and escalate privileges.</div><div class="tlc-url">gtfobins.github.io</div></div></a></div>
-    <div class="tool-link-card"><a href="https://lolbas-project.github.io/" target="_blank"><div class="tlc-icon">🪟</div><div class="tlc-body"><div class="tlc-name">LOLBAS Project</div><div class="tlc-desc">Living Off the Land Binaries on Windows — evade AV, execute payloads.</div><div class="tlc-url">lolbas-project.github.io</div></div></a></div>
-    <div class="tool-link-card"><a href="https://www.revshells.com/" target="_blank"><div class="tlc-icon">🐚</div><div class="tlc-body"><div class="tlc-name">RevShells Generator</div><div class="tlc-desc">One-click reverse shell generator for all languages and encodings.</div><div class="tlc-url">revshells.com</div></div></a></div>
-    <div class="tool-link-card"><a href="https://pentestmonkey.net/" target="_blank"><div class="tlc-icon">🐒</div><div class="tlc-body"><div class="tlc-name">PentestMonkey</div><div class="tlc-desc">Classic reverse shell and SQLi cheat sheets. Timeless reference.</div><div class="tlc-url">pentestmonkey.net</div></div></a></div>
-  </div>
-</div>
+    <div class="reveal">
+      <div class="tools-cat-label">NETWORK & PRIVILEGE ESCALATION</div>
+      <div class="tools-grid-links">
+        <div class="tool-link-card"><a href="https://gtfobins.github.io/" target="_blank"><div class="tlc-icon">⬆️</div><div class="tlc-body"><div class="tlc-name">GTFOBins</div><div class="tlc-desc">Unix binaries to bypass local security and escalate privileges.</div><div class="tlc-url">gtfobins.github.io</div></div></a></div>
+        <div class="tool-link-card"><a href="https://lolbas-project.github.io/" target="_blank"><div class="tlc-icon">🪟</div><div class="tlc-body"><div class="tlc-name">LOLBAS Project</div><div class="tlc-desc">Living Off the Land Binaries on Windows — evade AV, execute payloads.</div><div class="tlc-url">lolbas-project.github.io</div></div></a></div>
+        <div class="tool-link-card"><a href="https://www.revshells.com/" target="_blank"><div class="tlc-icon">🐚</div><div class="tlc-body"><div class="tlc-name">RevShells Generator</div><div class="tlc-desc">One-click reverse shell generator for all languages and encodings.</div><div class="tlc-url">revshells.com</div></div></a></div>
+        <div class="tool-link-card"><a href="https://pentestmonkey.net/" target="_blank"><div class="tlc-icon">🐒</div><div class="tlc-body"><div class="tlc-name">PentestMonkey</div><div class="tlc-desc">Classic reverse shell and SQLi cheat sheets. Timeless reference.</div><div class="tlc-url">pentestmonkey.net</div></div></a></div>
+      </div>
+    </div>
 
-<div class="reveal">
-  <div class="tools-cat-label">PRACTICE & RESEARCH</div>
-  <div class="tools-grid-links">
-    <div class="tool-link-card"><a href="https://app.hackthebox.com" target="_blank"><div class="tlc-icon">📦</div><div class="tlc-body"><div class="tlc-name">Hack The Box</div><div class="tlc-desc">Primary practice platform. Machines, challenges, CWES certified.</div><div class="tlc-url">app.hackthebox.com</div></div></a></div>
-    <div class="tool-link-card"><a href="https://tryhackme.com" target="_blank"><div class="tlc-icon">🏠</div><div class="tlc-body"><div class="tlc-name">TryHackMe</div><div class="tlc-desc">Guided learning paths. Where the Jr Pentester journey started.</div><div class="tlc-url">tryhackme.com</div></div></a></div>
-    <div class="tool-link-card"><a href="https://www.exploit-db.com/" target="_blank"><div class="tlc-icon">💣</div><div class="tlc-body"><div class="tlc-name">Exploit-DB</div><div class="tlc-desc">Public exploit database by OffSec. CVEs and PoC code.</div><div class="tlc-url">exploit-db.com</div></div></a></div>
-    <div class="tool-link-card"><a href="https://cve.mitre.org/" target="_blank"><div class="tlc-icon">🗂️</div><div class="tlc-body"><div class="tlc-name">CVE / MITRE</div><div class="tlc-desc">Official CVE database — research vulnerabilities at the source.</div><div class="tlc-url">cve.mitre.org</div></div></a></div>
-  </div>
-</div>
-```
+    <div class="reveal">
+      <div class="tools-cat-label">PRACTICE & RESEARCH</div>
+      <div class="tools-grid-links">
+        <div class="tool-link-card"><a href="https://app.hackthebox.com" target="_blank"><div class="tlc-icon">📦</div><div class="tlc-body"><div class="tlc-name">Hack The Box</div><div class="tlc-desc">Primary practice platform. Machines, challenges, CWES certified.</div><div class="tlc-url">app.hackthebox.com</div></div></a></div>
+        <div class="tool-link-card"><a href="https://tryhackme.com" target="_blank"><div class="tlc-icon">🏠</div><div class="tlc-body"><div class="tlc-name">TryHackMe</div><div class="tlc-desc">Guided learning paths. Where the Jr Pentester journey started.</div><div class="tlc-url">tryhackme.com</div></div></a></div>
+        <div class="tool-link-card"><a href="https://www.exploit-db.com/" target="_blank"><div class="tlc-icon">💣</div><div class="tlc-body"><div class="tlc-name">Exploit-DB</div><div class="tlc-desc">Public exploit database by OffSec. CVEs and PoC code.</div><div class="tlc-url">exploit-db.com</div></div></a></div>
+        <div class="tool-link-card"><a href="https://cve.mitre.org/" target="_blank"><div class="tlc-icon">🗂️</div><div class="tlc-body"><div class="tlc-name">CVE / MITRE</div><div class="tlc-desc">Official CVE database — research vulnerabilities at the source.</div><div class="tlc-url">cve.mitre.org</div></div></a></div>
+      </div>
+    </div>
 
   </div>
 </section>
 
 <!-- CERTIFICATIONS -->
-
 <section id="certs">
   <div class="section-label">Credentials Verified</div>
   <h2 class="section-title">CERTIFICATIONS</h2>
@@ -483,7 +473,6 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 </section>
 
 <!-- EXPERIENCE & EDUCATION -->
-
 <section id="experience">
   <div class="section-label">Operational History</div>
   <h2 class="section-title">EXPERIENCE &amp; EDUCATION</h2>
@@ -491,63 +480,60 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 
   <div class="exp-timeline">
 
-```
-<div class="exp-item current">
-  <div class="exp-top"><div class="exp-role">CTF Team Member</div><div class="exp-dates">Mar 2026 – Present</div></div>
-  <div class="exp-company">ChaØs Team · Porto, Portugal<span class="type-badge">Part-time</span></div>
-  <p class="exp-desc">Competing in international CTF competitions. Focused on web exploitation, cryptography, and forensics challenges alongside a skilled team.</p>
-  <div class="exp-highlight"><span>🏆</span>&nbsp; upCTF2026 International — <strong>8th place out of 305 teams</strong></div>
-  <div class="exp-tags"><span class="exp-tag">Web Exploitation</span><span class="exp-tag">Cryptography</span><span class="exp-tag">Forensics</span><span class="exp-tag">International Competition</span></div>
-</div>
+    <div class="exp-item current">
+      <div class="exp-top"><div class="exp-role">CTF Team Member</div><div class="exp-dates">Mar 2026 – Present</div></div>
+      <div class="exp-company">ChaØs Team · Porto, Portugal<span class="type-badge">Part-time</span></div>
+      <p class="exp-desc">Competing in international CTF competitions. Focused on web exploitation, cryptography, and forensics challenges alongside a skilled team.</p>
+      <div class="exp-highlight"><span>🏆</span>&nbsp; upCTF2026 International — <strong>8th place out of 305 teams</strong></div>
+      <div class="exp-tags"><span class="exp-tag">Web Exploitation</span><span class="exp-tag">Cryptography</span><span class="exp-tag">Forensics</span><span class="exp-tag">International Competition</span></div>
+    </div>
 
-<div class="exp-item current">
-  <div class="exp-top"><div class="exp-role">Penetration Tester</div><div class="exp-dates">Feb 2026 – Present</div></div>
-  <div class="exp-company">Oramix · Porto, Portugal<span class="type-badge">Full-time · Hybrid</span></div>
-  <p class="exp-desc">Professional penetration testing engagements for clients. Conducting security assessments, writing detailed reports, and providing remediation guidance. <strong>First industry role as a pentester.</strong></p>
-  <div class="exp-tags"><span class="exp-tag">Pentesting</span><span class="exp-tag">Security Assessments</span><span class="exp-tag">Report Writing</span><span class="exp-tag">Client Engagements</span></div>
-</div>
+    <div class="exp-item current">
+      <div class="exp-top"><div class="exp-role">Penetration Tester</div><div class="exp-dates">Feb 2026 – Present</div></div>
+      <div class="exp-company">Oramix · Porto, Portugal<span class="type-badge">Full-time · Hybrid</span></div>
+      <p class="exp-desc">Professional penetration testing engagements for clients. Conducting security assessments, writing detailed reports, and providing remediation guidance. <strong>First industry role as a pentester.</strong></p>
+      <div class="exp-tags"><span class="exp-tag">Pentesting</span><span class="exp-tag">Security Assessments</span><span class="exp-tag">Report Writing</span><span class="exp-tag">Client Engagements</span></div>
+    </div>
 
-<div class="exp-item">
-  <div class="exp-top"><div class="exp-role">SRS – Engineer I</div><div class="exp-dates">Aug 2025 – Feb 2026 · 7 mos</div></div>
-  <div class="exp-company">Critical Software · Porto, Portugal<span class="type-badge">Full-time · Hybrid</span></div>
-  <p class="exp-desc">Software engineering in critical systems — high-reliability, safety-critical software environments. Built deep understanding of secure architecture and resilience engineering.</p>
-  <div class="exp-tags"><span class="exp-tag">Software Engineering</span><span class="exp-tag">Critical Systems</span><span class="exp-tag">Safety-Critical SW</span></div>
-</div>
+    <div class="exp-item">
+      <div class="exp-top"><div class="exp-role">SRS – Engineer I</div><div class="exp-dates">Aug 2025 – Feb 2026 · 7 mos</div></div>
+      <div class="exp-company">Critical Software · Porto, Portugal<span class="type-badge">Full-time · Hybrid</span></div>
+      <p class="exp-desc">Software engineering in critical systems — high-reliability, safety-critical software environments. Built deep understanding of secure architecture and resilience engineering.</p>
+      <div class="exp-tags"><span class="exp-tag">Software Engineering</span><span class="exp-tag">Critical Systems</span><span class="exp-tag">Safety-Critical SW</span></div>
+    </div>
 
-<div class="exp-item">
-  <div class="exp-top"><div class="exp-role">Identity and Security – Intern</div><div class="exp-dates">Feb 2025 – Jul 2025 · 6 mos</div></div>
-  <div class="exp-company">ARMIS Group · Porto, Portugal<span class="type-badge">Internship · Hybrid</span></div>
-  <p class="exp-desc">Security-focused internship working with <strong>Azure</strong>, <strong>Microsoft Entra ID</strong>, and identity management. Hands-on exposure to enterprise IAM and access security infrastructure.</p>
-  <div class="exp-tags"><span class="exp-tag">Azure</span><span class="exp-tag">Microsoft Entra ID</span><span class="exp-tag">Identity Security</span><span class="exp-tag">ECMA</span></div>
-</div>
+    <div class="exp-item">
+      <div class="exp-top"><div class="exp-role">Identity and Security – Intern</div><div class="exp-dates">Feb 2025 – Jul 2025 · 6 mos</div></div>
+      <div class="exp-company">ARMIS Group · Porto, Portugal<span class="type-badge">Internship · Hybrid</span></div>
+      <p class="exp-desc">Security-focused internship working with <strong>Azure</strong>, <strong>Microsoft Entra ID</strong>, and identity management. Hands-on exposure to enterprise IAM and access security infrastructure.</p>
+      <div class="exp-tags"><span class="exp-tag">Azure</span><span class="exp-tag">Microsoft Entra ID</span><span class="exp-tag">Identity Security</span><span class="exp-tag">ECMA</span></div>
+    </div>
 
-<div class="exp-item">
-  <div class="exp-top"><div class="exp-role">Event Department – Member</div><div class="exp-dates">Sep 2024 – Jul 2025 · 11 mos</div></div>
-  <div class="exp-company">Núcleo de Estudantes de Informática do ISEP · Porto<span class="type-badge">Freelance</span></div>
-  <p class="exp-desc">Organized and moderated the annual academic workshop for ISEP's Computer Science student nucleus. Led event planning, logistics, and community coordination.</p>
-  <div class="exp-tags"><span class="exp-tag">Event Planning</span><span class="exp-tag">Project Management</span><span class="exp-tag">Community</span></div>
-</div>
+    <div class="exp-item">
+      <div class="exp-top"><div class="exp-role">Event Department – Member</div><div class="exp-dates">Sep 2024 – Jul 2025 · 11 mos</div></div>
+      <div class="exp-company">Núcleo de Estudantes de Informática do ISEP · Porto<span class="type-badge">Freelance</span></div>
+      <p class="exp-desc">Organized and moderated the annual academic workshop for ISEP's Computer Science student nucleus. Led event planning, logistics, and community coordination.</p>
+      <div class="exp-tags"><span class="exp-tag">Event Planning</span><span class="exp-tag">Project Management</span><span class="exp-tag">Community</span></div>
+    </div>
 
-<div class="exp-item edu-item">
-  <div class="exp-top"><div class="exp-role">CEH Certification Training</div><div class="exp-dates">Sep 2025 – Jan 2026</div></div>
-  <div class="exp-company edu-co">ISEP Academy · EC-Council<span class="type-badge edu-b">Education</span></div>
-  <p class="exp-desc">Official <strong>Certified Ethical Hacker (CEH)</strong> training through ISEP Academy. Culminated in passing the EC-Council CEH exam in March 2026.</p>
-  <div class="exp-tags"><span class="exp-tag">CEH</span><span class="exp-tag">EC-Council</span><span class="exp-tag">Ethical Hacking</span></div>
-</div>
+    <div class="exp-item edu-item">
+      <div class="exp-top"><div class="exp-role">CEH Certification Training</div><div class="exp-dates">Sep 2025 – Jan 2026</div></div>
+      <div class="exp-company edu-co">ISEP Academy · EC-Council<span class="type-badge edu-b">Education</span></div>
+      <p class="exp-desc">Official <strong>Certified Ethical Hacker (CEH)</strong> training through ISEP Academy. Culminated in passing the EC-Council CEH exam in March 2026.</p>
+      <div class="exp-tags"><span class="exp-tag">CEH</span><span class="exp-tag">EC-Council</span><span class="exp-tag">Ethical Hacking</span></div>
+    </div>
 
-<div class="exp-item edu-item">
-  <div class="exp-top"><div class="exp-role">Licenciatura – Engenharia Informática</div><div class="exp-dates">Sep 2022 – Jun 2025</div></div>
-  <div class="exp-company edu-co">Instituto Superior de Engenharia do Porto (ISEP)<span class="type-badge edu-b">Education</span></div>
-  <p class="exp-desc">Bachelor's in Computer Engineering. Graduated with a <strong>grade of 16</strong> and a final internship score of <strong>19/20</strong>. Solid foundation in software engineering, networking, databases, and systems.</p>
-  <div class="exp-tags"><span class="exp-tag">Grade: 16/20</span><span class="exp-tag">Internship: 19/20</span><span class="exp-tag">Computer Engineering</span><span class="exp-tag">ISEP</span></div>
-</div>
-```
+    <div class="exp-item edu-item">
+      <div class="exp-top"><div class="exp-role">Licenciatura – Engenharia Informática</div><div class="exp-dates">Sep 2022 – Jun 2025</div></div>
+      <div class="exp-company edu-co">Instituto Superior de Engenharia do Porto (ISEP)<span class="type-badge edu-b">Education</span></div>
+      <p class="exp-desc">Bachelor's in Computer Engineering. Graduated with a <strong>grade of 16</strong> and a final internship score of <strong>19/20</strong>. Solid foundation in software engineering, networking, databases, and systems.</p>
+      <div class="exp-tags"><span class="exp-tag">Grade: 16/20</span><span class="exp-tag">Internship: 19/20</span><span class="exp-tag">Computer Engineering</span><span class="exp-tag">ISEP</span></div>
+    </div>
 
   </div>
 </section>
 
 <!-- CTF & LABS -->
-
 <section id="ctf">
   <div class="section-label">Operational Activity</div>
   <h2 class="section-title">CTF &amp; LABS</h2>
@@ -582,7 +568,6 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 </section>
 
 <!-- PROJECTS -->
-
 <section id="projects">
   <div class="section-label">Custom Arsenal</div>
   <h2 class="section-title">PROJECTS</h2>
@@ -610,7 +595,6 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 </section>
 
 <!-- GOALS -->
-
 <section id="goals">
   <div class="section-label">Mission Briefing</div>
   <h2 class="section-title">THE ROADMAP</h2>
@@ -645,7 +629,6 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 </section>
 
 <!-- CONTACT -->
-
 <section id="contact">
   <div class="section-label">Establish Connection</div>
   <h2 class="section-title">CONTACT</h2>
@@ -671,65 +654,64 @@ footer{background:var(–bg);border-top:1px solid rgba(0,255,136,0.06);padding:2
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-
 /* CURSOR */
-const cd=document.getElementById(‘cd’),cr=document.getElementById(‘cr’);
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener(‘mousemove’,e=>{mx=e.clientX;my=e.clientY;});
-(function loop(){cd.style.left=mx+‘px’;cd.style.top=my+‘px’;rx+=(mx-rx)*.15;ry+=(my-ry)*.15;cr.style.left=rx+‘px’;cr.style.top=ry+‘px’;requestAnimationFrame(loop);})();
-document.querySelectorAll(‘a,button’).forEach(el=>{
-el.addEventListener(‘mouseenter’,()=>{cr.style.width=‘48px’;cr.style.height=‘48px’;cr.style.borderColor=‘rgba(0,255,136,0.8)’;});
-el.addEventListener(‘mouseleave’,()=>{cr.style.width=‘28px’;cr.style.height=‘28px’;cr.style.borderColor=‘rgba(0,255,136,0.5)’;});
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function loop(){cd.style.left=mx+'px';cd.style.top=my+'px';rx+=(mx-rx)*.15;ry+=(my-ry)*.15;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cr.style.width='48px';cr.style.height='48px';cr.style.borderColor='rgba(0,255,136,0.8)';});
+  el.addEventListener('mouseleave',()=>{cr.style.width='28px';cr.style.height='28px';cr.style.borderColor='rgba(0,255,136,0.5)';});
 });
 
 /* NAV */
-window.addEventListener(‘scroll’,()=>document.getElementById(‘nav’).classList.toggle(‘scrolled’,scrollY>50));
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50));
 
 /* REVEAL */
 const obs=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){
-e.target.classList.add(‘visible’);
-e.target.querySelectorAll(’.skill-fill’).forEach(b=>b.style.width=b.dataset.width+’%’);
-e.target.querySelectorAll(’.cert-progress-fill’).forEach(b=>{/* already inline */});
-}
-});
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.skill-fill').forEach(b=>b.style.width=b.dataset.width+'%');
+      e.target.querySelectorAll('.cert-progress-fill').forEach(b=>{/* already inline */});
+    }
+  });
 },{threshold:.08});
-document.querySelectorAll(’.reveal’).forEach(el=>obs.observe(el));
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 /* TIMELINE ITEMS staggered */
 const tObs=new IntersectionObserver(entries=>{
-entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add(‘visible’),i*70);});
+  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*70);});
 },{threshold:.12});
-document.querySelectorAll(’.exp-item,.roadmap-item’).forEach(el=>tObs.observe(el));
+document.querySelectorAll('.exp-item,.roadmap-item').forEach(el=>tObs.observe(el));
 
 /* COUNT UP */
-function countUp(el,t,d=1800){const s=performance.now();const u=n=>{const p=Math.min((n-s)/d,1);el.textContent=Math.floor(p*t)+(t>50?’+’:’’);if(p<1)requestAnimationFrame(u);else el.textContent=t+(t>50?’+’:’’);};requestAnimationFrame(u);}
-new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){document.querySelectorAll(’[data-count]’).forEach(el=>countUp(el,+el.dataset.count));}});},{threshold:.3}).observe(document.querySelector(’.hero-stats’));
+function countUp(el,t,d=1800){const s=performance.now();const u=n=>{const p=Math.min((n-s)/d,1);el.textContent=Math.floor(p*t)+(t>50?'+':'');if(p<1)requestAnimationFrame(u);else el.textContent=t+(t>50?'+':'');};requestAnimationFrame(u);}
+new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('[data-count]').forEach(el=>countUp(el,+el.dataset.count));}});},{threshold:.3}).observe(document.querySelector('.hero-stats'));
 
 /* HEX GRID */
-const hg=document.getElementById(‘hexGrid’),hx=‘0123456789ABCDEF’;
-for(let i=0;i<48;i++){const c=document.createElement(‘div’);c.className=‘hex-cell’;c.textContent=hx[Math.random()*16|0]+hx[Math.random()*16|0];c.style.setProperty(’–dur’,(3+Math.random()*5)+‘s’);c.style.setProperty(’–delay’,(Math.random()*4)+‘s’);hg.appendChild(c);setInterval(()=>c.textContent=hx[Math.random()*16|0]+hx[Math.random()*16|0],(1500+Math.random()*2000)|0);}
+const hg=document.getElementById('hexGrid'),hx='0123456789ABCDEF';
+for(let i=0;i<48;i++){const c=document.createElement('div');c.className='hex-cell';c.textContent=hx[Math.random()*16|0]+hx[Math.random()*16|0];c.style.setProperty('--dur',(3+Math.random()*5)+'s');c.style.setProperty('--delay',(Math.random()*4)+'s');hg.appendChild(c);setInterval(()=>c.textContent=hx[Math.random()*16|0]+hx[Math.random()*16|0],(1500+Math.random()*2000)|0);}
 
 /* MATRIX RAIN */
-const cv=document.getElementById(‘mc’),cx=cv.getContext(‘2d’);
-function rsz(){cv.width=innerWidth;cv.height=innerHeight;}rsz();addEventListener(‘resize’,rsz);
+const cv=document.getElementById('mc'),cx=cv.getContext('2d');
+function rsz(){cv.width=innerWidth;cv.height=innerHeight;}rsz();addEventListener('resize',rsz);
 const cols=Math.floor(innerWidth/20),drops=Array(cols).fill(1);
-const mc2=‘01アイウエオカキクケコサシスセソ’;
-setInterval(()=>{cx.fillStyle=‘rgba(7,10,14,0.05)’;cx.fillRect(0,0,cv.width,cv.height);cx.fillStyle=’#00ff88’;cx.font=‘13px JetBrains Mono,monospace’;drops.forEach((y,i)=>{cx.fillText(mc2[Math.random()*mc2.length|0],i*20,y*20);if(y*20>cv.height&&Math.random()>.975)drops[i]=0;drops[i]++;});},60);
+const mc2='01アイウエオカキクケコサシスセソ';
+setInterval(()=>{cx.fillStyle='rgba(7,10,14,0.05)';cx.fillRect(0,0,cv.width,cv.height);cx.fillStyle='#00ff88';cx.font='13px JetBrains Mono,monospace';drops.forEach((y,i)=>{cx.fillText(mc2[Math.random()*mc2.length|0],i*20,y*20);if(y*20>cv.height&&Math.random()>.975)drops[i]=0;drops[i]++;});},60);
 
 /* GLITCH */
-setInterval(()=>{const g=document.querySelector(’.hero-name .first’);if(g){g.style.textShadow=`${Math.random()*4-2}px 0 var(--cyan)`;setTimeout(()=>g.style.textShadow=’’,80);}},3000);
+setInterval(()=>{const g=document.querySelector('.hero-name .first');if(g){g.style.textShadow=`${Math.random()*4-2}px 0 var(--cyan)`;setTimeout(()=>g.style.textShadow='',80);}},3000);
 
 /* FIX: trigger count-up immediately if hero already visible on load */
-window.addEventListener(‘load’,()=>{
-const hs=document.querySelector(’.hero-stats’);
-if(hs){const r=hs.getBoundingClientRect();if(r.top<window.innerHeight){document.querySelectorAll(’[data-count]’).forEach(el=>countUp(el,+el.dataset.count));}}
-/* also force-check all reveals already in viewport */
-document.querySelectorAll(’.reveal,.exp-item,.roadmap-item’).forEach(el=>{
-const r=el.getBoundingClientRect();
-if(r.top<window.innerHeight*1.1){el.classList.add(‘visible’);el.querySelectorAll(’.skill-fill’).forEach(b=>b.style.width=b.dataset.width+’%’);}
-});
+window.addEventListener('load',()=>{
+  const hs=document.querySelector('.hero-stats');
+  if(hs){const r=hs.getBoundingClientRect();if(r.top<window.innerHeight){document.querySelectorAll('[data-count]').forEach(el=>countUp(el,+el.dataset.count));}}
+  /* also force-check all reveals already in viewport */
+  document.querySelectorAll('.reveal,.exp-item,.roadmap-item').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight*1.1){el.classList.add('visible');el.querySelectorAll('.skill-fill').forEach(b=>b.style.width=b.dataset.width+'%');}
+  });
 });
 </script>
 </body>
