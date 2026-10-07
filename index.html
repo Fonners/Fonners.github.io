@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>José Afonso — Penetration Tester</title>
+<meta name="description" content="José Afonso, penetration tester and CTF player. Web security, network security, identity systems and offensive security.">
+<meta name="theme-color" content="#0e0f14">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'none'; form-action 'none'; connect-src 'none'; object-src 'none'">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke-width='8'%3E%3Cpath d='M20 74V52a40 40 0 0 1 80 0V62' stroke='%23ee2b2b'/%3E%3Cpath d='M32 74V52a28 28 0 0 1 56 0V74' stroke='%23ffd21a'/%3E%3Cpath d='M44 74V52a16 16 0 0 1 32 0V74' stroke='%232ee6f0'/%3E%3C/g%3E%3Crect x='14' y='72' width='92' height='40' rx='8' fill='%23f3ecdd'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="crt-lines" aria-hidden="true"></div>
+<div class="crt-vig" aria-hidden="true"></div>
+
+<div id="boot" class="boot-screen" aria-label="System boot sequence">
+  <div class="boot-frame">
+    <div class="boot-mark"><span class="stripe s-c"></span><span class="stripe s-g"></span><span class="stripe s-y"></span><span class="stripe s-r"></span></div>
+    <div class="boot-label">JAS // FIELD SECURITY NODE</div>
+    <div class="boot-title">OPERATOR TERMINAL</div>
+    <div class="boot-lines" id="bootLines"></div>
+    <div class="boot-progress"><i id="bootProgress"></i></div>
+    <button id="enterBtn" class="btn fill hidden" type="button">Enter system</button>
+  </div>
+</div>
+
+<div class="page">
+  <svg class="stripes" width="460" height="900" viewBox="0 0 460 900" aria-hidden="true">
+    <defs>
+      <filter id="glow" x="-30%" y="-10%" width="160%" height="120%">
+        <feGaussianBlur stdDeviation="7" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <g fill="none" stroke-width="26" filter="url(#glow)">
+      <path d="M20 0C120 260 230 520 240 900" stroke="#2ee6f0"/>
+      <path d="M80 0C180 260 290 520 300 900" stroke="#2fe27a"/>
+      <path d="M140 0C240 260 350 520 360 900" stroke="#ffd21a"/>
+      <path d="M200 0C300 260 410 520 420 900" stroke="#ee2b2b"/>
+    </g>
+  </svg>
+
+  <div class="rs"></div>
+
+  <header class="wrap">
+    <nav class="top" aria-label="Main">
+      <a class="brand" href="#top" aria-label="Fonners home">
+        <svg width="46" height="46" viewBox="0 0 120 120" role="img" aria-label="Fonners emblem">
+          <g fill="none" stroke-width="6">
+            <path d="M20 74V52a40 40 0 0 1 80 0V62" stroke="#ee2b2b"/>
+            <path d="M28 74V52a32 32 0 0 1 64 0V74" stroke="#ffd21a"/>
+            <path d="M36 74V52a24 24 0 0 1 48 0V74" stroke="#2fe27a"/>
+            <path d="M44 74V52a16 16 0 0 1 32 0V74" stroke="#2ee6f0"/>
+          </g>
+          <rect x="14" y="72" width="92" height="40" rx="8" fill="#f3ecdd"/>
+          <circle cx="60" cy="88" r="5" fill="#0e0f14"/>
+          <rect x="58" y="88" width="4" height="12" fill="#0e0f14"/>
+        </svg>
+        <span class="h crt" style="font-size:28px">FONNERS</span>
+      </a>
+      <ul>
+        <li><a href="#ops">Operations</a></li>
+        <li><a href="#reports">Field Reports</a></li>
+        <li><a href="#loadout">Loadout</a></li>
+        <li><a href="#log">Log</a></li>
+        <li><a href="#comms">Comms</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="wrap hero" id="top">
+      <div class="grid g2">
+        <div class="hero-copy">
+          <div class="lb gy">Mission active // Porto, Portugal</div>
+          <h1 class="h crt"><span class="gy">Breach.</span><br>Analyse.<br><span class="gc">Harden.</span></h1>
+        </div>
+        <div>
+          <div class="panel operator-card">
+            <div class="rs" style="z-index:auto"></div>
+            <div style="padding:28px">
+              <div class="card-meta"><span class="lb">Operator file</span><span class="lb gg">● Online</span></div>
+              <div class="badge-wrap" aria-hidden="true">
+                <svg width="190" height="190" viewBox="0 0 120 120">
+                  <defs><filter id="badge" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                  <g fill="none" stroke-width="6" filter="url(#badge)">
+                    <path d="M20 74V52a40 40 0 0 1 80 0V62" stroke="#ee2b2b"/>
+                    <path d="M28 74V52a32 32 0 0 1 64 0V74" stroke="#ffd21a"/>
+                    <path d="M36 74V52a24 24 0 0 1 48 0V74" stroke="#2fe27a"/>
+                    <path d="M44 74V52a16 16 0 0 1 32 0V74" stroke="#2ee6f0"/>
+                  </g>
+                  <rect x="14" y="72" width="92" height="40" rx="8" fill="#f3ecdd" filter="url(#badge)"/>
+                  <circle cx="60" cy="88" r="5" fill="#0e0f14"/>
+                  <rect x="58" y="88" width="4" height="12" fill="#0e0f14"/>
+                </svg>
+              </div>
+              <div class="h crt operator-name">José Afonso</div>
+              <div class="lb center">Penetration Tester // CTF</div>
+              <div class="kv"><span class="lb">Unit</span><span>Oramix</span></div>
+              <div class="kv"><span class="lb">Team</span><span>ChaØs</span></div>
+              <div class="kv"><span class="lb">upCTF2026</span><span>8th of 305 teams</span></div>
+              <div class="kv"><span class="lb">Certs</span><span>7 confirmed</span></div>
+            </div>
+          </div>
+          <p class="intro">Full-time pentester. BSc Computer Engineering at ISEP, grade 16, internship 19/20. I map attack surfaces, document every vector, and leave systems stronger.</p>
+          <div class="button-row">
+            <a class="btn fill" href="#comms">Initiate contact</a>
+            <a class="btn line" href="https://github.com/Fonners" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ops" class="wrap sec first">
+      <div class="lb gc">01 // Operations</div>
+      <h2 class="h crt">Mission logs</h2>
+      <div class="panel table-panel">
+        <div class="row head"><span class="lb">Event</span><span class="lb">Operation</span><span class="lb">Category</span><span class="lb">Result</span></div>
+        <div class="row"><span>upCTF2026 Intl.</span><span>ChaØs Team, 305 teams</span><span class="gc">CTF</span><span>8th place</span></div>
+        <div class="row"><span>Hack The Box</span><span>CWES certified, CPTS in progress</span><span class="gr">PrivEsc / AD</span><span>Active</span></div>
+        <div class="row"><span>PortSwigger Academy</span><span>200+ labs, BSCP track</span><span class="gy">Web</span><span>In progress</span></div>
+      </div>
+    </section>
+
+    <section id="reports" class="wrap sec">
+      <div class="lb gg">02 // Field reports</div>
+      <h2 class="h crt">Recovered logs</h2>
+      <div class="grid cards">
+        <article class="panel card">
+          <div class="lb gc">Python // Knowledge base</div>
+          <h3 class="h">CTF-Walkthroughs</h3>
+          <p>Writeups of completed challenges: methodology, exploitation steps and post-exploitation paths.</p>
+          <a href="https://github.com/Fonners/CTF-Walkthroughs" target="_blank" rel="noopener">View source →</a>
+        </article>
+        <article class="panel card">
+          <div class="lb gy">Python // Bug bounty</div>
+          <h3 class="h">AI-Subdomain-Enumerator</h3>
+          <p>Builds a targeted wordlist from a domain's web page to widen subdomain discovery.</p>
+          <a href="https://github.com/Fonners/AI-Subdomain-Enumerator" target="_blank" rel="noopener">View source →</a>
+        </article>
+        <article class="panel card classified">
+          <div class="lb gr">Bash / Python</div>
+          <h3 class="h">Next tool: classified</h3>
+          <p>In active development. The arsenal keeps growing.</p>
+          <a href="https://github.com/Fonners" target="_blank" rel="noopener">Watch GitHub →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="loadout" class="wrap sec">
+      <div class="lb gy">03 // Loadout</div>
+      <h2 class="h crt">Gear and certs</h2>
+      <div class="tool-cloud" aria-label="Security tools">
+        <span class="tag">Nmap</span><span class="tag">Metasploit</span><span class="tag">Burp Suite</span><span class="tag">Wireshark</span><span class="tag">Hydra</span><span class="tag">Gobuster</span><span class="tag">SQLMap</span><span class="tag">Netcat</span><span class="tag">Hashcat</span><span class="tag">BloodHound</span><span class="tag">Impacket</span><span class="tag">FFUF</span><span class="tag">Azure Entra ID</span>
+      </div>
+      <div class="panel cert-panel">
+        <div class="row r3 head"><span class="lb">Status</span><span class="lb">Issuer</span><span class="lb">Credential</span></div>
+        <div class="row r3"><span class="gg">✓ Confirmed</span><span>EC-Council</span><span>Certified Ethical Hacker (CEH), Mar 2026</span></div>
+        <div class="row r3"><span class="gg">✓ Confirmed</span><span>Hack The Box</span><span>Certified Web Exploitation Specialist (CWES), Jan 2026</span></div>
+        <div class="row r3"><span class="gg">✓ Confirmed</span><span>Cisco Networking Academy</span><span>Network Technician Path, Ethical Hacker, Intro to Cybersecurity</span></div>
+        <div class="row r3"><span class="gg">✓ Confirmed</span><span>LinkedIn Learning</span><span>Cybersecurity Threat Landscape, Key Policies and Resources</span></div>
+        <div class="row r3"><span class="gy">⟳ In transit</span><span>Hack The Box</span><span>Certified Penetration Testing Specialist (CPTS)</span></div>
+        <div class="row r3"><span class="gy">⟳ In transit</span><span>PortSwigger</span><span>Burp Suite Certified Practitioner (BSCP)</span></div>
+        <div class="row r3"><span class="gc">◎ Target locked</span><span>OffSec</span><span>OSCP+</span></div>
+      </div>
+    </section>
+
+    <section id="log" class="wrap sec">
+      <div class="lb gr">04 // Mission log</div>
+      <h2 class="h crt">Career trajectory</h2>
+      <div class="panel table-panel">
+        <div class="row r3 head"><span class="lb">Period</span><span class="lb">Role</span><span class="lb">Unit</span></div>
+        <div class="row r3"><span class="gc">Mar 2026 – now</span><span>CTF Team Member</span><span>ChaØs Team, Porto</span></div>
+        <div class="row r3"><span class="gc">Feb 2026 – now</span><span>Penetration Tester</span><span>Oramix, Porto. First industry pentest role.</span></div>
+        <div class="row r3"><span>Aug 2025 – Feb 2026</span><span>SRS Engineer I</span><span>Critical Software, Porto. Safety-critical systems.</span></div>
+        <div class="row r3"><span>Feb – Jul 2025</span><span>Identity &amp; Security Intern</span><span>ARMIS Group. Azure, Entra ID, IAM. Scored 19/20.</span></div>
+        <div class="row r3"><span>Sep 2024 – Jul 2025</span><span>Event Department</span><span>NEI-ISEP. Organised the annual academic workshop.</span></div>
+        <div class="row r3"><span class="gy">Sep 2025 – Jan 2026</span><span>CEH Training</span><span>ISEP Academy · EC-Council</span></div>
+        <div class="row r3"><span class="gy">Sep 2022 – Jun 2025</span><span>BSc Computer Engineering</span><span>ISEP, Porto. Grade 16/20.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="comms" class="comms">
+    <div class="rs" style="z-index:auto"></div>
+    <div class="wrap footer-inner">
+      <div class="grid g2 footer-grid">
+        <div><div class="lb gr">05 // Comms</div><h2 class="h crt">Let's work<br><span class="gc">together.</span></h2></div>
+        <div>
+          <p class="footer-intro">Open to pentest engagements, bug bounty collaborations, red team projects and fellow researchers.</p>
+          <div class="lb">GitHub</div><div class="footer-link"><a href="https://github.com/Fonners" target="_blank" rel="noopener">@Fonners</a></div>
+          <div class="lb">LinkedIn</div><div class="footer-link"><a href="https://www.linkedin.com/in/jos%C3%A9-afonso-528a71226" target="_blank" rel="noopener">José Afonso</a></div>
+          <div class="lb">Portfolio</div><div class="footer-link"><a href="https://fonners.github.io">fonners.github.io</a></div>
+        </div>
+      </div>
+      <div class="lb copyright">© <span id="year"></span> JA_FONNERS // Porto, PT</div>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
